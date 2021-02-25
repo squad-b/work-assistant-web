@@ -1,4 +1,5 @@
 import React from "react";
+import "./sample-sample.scss";
 
 class Sample extends React.Component {
   constructor(props) {
