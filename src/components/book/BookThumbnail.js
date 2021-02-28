@@ -5,7 +5,7 @@ class BookThumbnail extends React.Component {
   render() {
     const imgUrl = this.props.imgUrl;
     return (
-      <div>
+      <div className="thumbnail-box">
         <img src={imgUrl} alt="책 썸네일"/>
       </div>
     );
