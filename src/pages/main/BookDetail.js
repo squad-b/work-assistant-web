@@ -1,5 +1,8 @@
 import * as React from "react";
-import Book from "../../domain/Book";
+import Book from "../../domain/book/Book";
+import BookThumbnail from "../../components/book/BookThumbnail";
+import BookDetailHeader from "../../components/book/BookDetailHeader";
+import BookRentalInformation from "../../components/book/BookRentalInformation";
 
 class BookDetail extends React.Component {
   render() {
@@ -10,19 +13,11 @@ class BookDetail extends React.Component {
       ['개발', '밥']);
     return (
       <div>
-        <img src={book.thumbnail} alt="책 썸네일"/>
-        <h1>{book.name}</h1>
-        <ul>
-          <li>#{book.categories[0]}</li>
-          <li>#{book.categories[1]}</li>
-        </ul>
-        대여 정보 : {!book.canRent() ? this.rentalInformation(book.bookRental): <button>대여 가능</button>}
+        <BookThumbnail imgUrl={book.thumbnail}/>
+        <BookDetailHeader title={book.title} categories={book.categories}/>
+        <BookRentalInformation rentalInformation = {book.bookRental} />
       </div>
     );
-  }
-
-  rentalInformation(bookRental) {
-    return `${bookRental.borrower} [${bookRental.startDate} ~ ${bookRental.endDate}]`
   }
 }
 
