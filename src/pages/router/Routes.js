@@ -1,6 +1,7 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import Index from "../main/Index";
+import BookDetail from "../main/BookDetail";
 
 class Routes extends React.Component {
   render() {
@@ -8,6 +9,7 @@ class Routes extends React.Component {
       <div>
         <BrowserRouter>
           <Route exact path="/" component={Index} />
+          <Route exact path="/books/:bookId" component={BookDetail} />
         </BrowserRouter>
       </div>
     );
