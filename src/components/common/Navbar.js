@@ -2,7 +2,6 @@ import React from "react";
 import NavItem from "./NavItem";
 import ago from "../../assets/img/ago.png";
 import { Link } from "react-router-dom";
-import "./base.scss";
 import "./navbar.scss";
 
 class NavBar extends React.Component {
