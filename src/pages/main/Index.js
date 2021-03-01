@@ -1,11 +1,14 @@
 import React from "react";
-import Sample from "../../components/sample/Sample";
+import BookListSection from "../../components/main/BookListSection";
+import Layout from "../../components/common/Layout";
 
 class Index extends React.Component {
   render() {
     return (
       <div>
-          <Sample/>
+        <Layout>
+          <BookListSection/>
+        </Layout>
       </div>
     );
   }
