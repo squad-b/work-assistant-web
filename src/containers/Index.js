@@ -1,5 +1,5 @@
-import MyPage from "../pages/user/MyPage";
 import {connect} from "react-redux";
+import Index from "../pages/main/Index";
 
 function mapReduxStateToReactProps(state) {
   return {
@@ -7,4 +7,4 @@ function mapReduxStateToReactProps(state) {
   }
 }
 
-export default connect(mapReduxStateToReactProps)(MyPage)
+export default connect(mapReduxStateToReactProps)(Index)

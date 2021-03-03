@@ -7,7 +7,7 @@ export default class MyPage extends React.Component {
     return (
       <div>
         <h1>마이 페이지</h1>
-        <Profile profile={this.props.user.profile}/>
+        <Profile profile={this.props.user}/>
         <BorrowingBookList bookList={this.props.user.bookList} />
       </div>
     );
