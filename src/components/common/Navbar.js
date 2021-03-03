@@ -1,8 +1,8 @@
 import React from "react";
 import NavItem from "./NavItem";
-import ago from "../../assets/img/ago.png";
 import { Link } from "react-router-dom";
 import "./navbar.scss";
+import coin from "../../assets/img/coin.svg";
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class NavBar extends React.Component {
       <div className="main-nav">
         <div className="main-nav-logo">
           <Link to="/">
-            <img src={ago} className="logo" alt="" />
+            <img src={coin} className="logo" alt="" />
           </Link>
         </div>
         <div className="main-nav-list">
