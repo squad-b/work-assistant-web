@@ -2,6 +2,7 @@ import * as React from "react";
 import Book from "../../domain/book/Book";
 import BookThumbnail from "../../components/book/BookThumbnail";
 import BookDetail from "../../components/book/BookDetail";
+import Layout from "../../components/common/Layout";
 
 class BookPage extends React.Component {
   render() {
@@ -13,8 +14,10 @@ class BookPage extends React.Component {
       ['개발', '밥']);
     return (
       <div>
-        <BookThumbnail imgUrl={book.thumbnail}/>
-        <BookDetail book={book}/>
+        <Layout>
+          <BookThumbnail imgUrl={book.thumbnail}/>
+          <BookDetail book={book}/>
+        </Layout>
       </div>
     );
   }

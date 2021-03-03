@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./navitem.scss"
 
 class NavItem extends React.Component {
   render() {

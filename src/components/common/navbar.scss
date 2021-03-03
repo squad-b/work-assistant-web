@@ -1,41 +1,16 @@
 .main-nav {
   display: flex;
-  height: 70px;
-  max-width: 1040px;
-  margin: 0 auto;
+  height: 65px;
+  border-bottom: solid rgb(231, 231, 231);
+  border-bottom-width: 0.5px;
 
   .main-nav-logo {
-    width: 20%;
-    max-width: 400px;
+    width: 21%;
     text-align: center;
-    padding: 10px 0;
+    padding: 5px 0px;
 
     .logo {
-      width: 60px;
-      margin: 3px;
-    }
-  }
-  
-  .main-nav-list {
-    width: 80%;
-    max-width: 1200px;
-  
-    .main-nav-box {
-      display: flex;
-      float: right;
-  
-      .main-nav-item {
-        width: 125px;
-        max-width: 350px;
-        text-align: center;
-        font-size: 16px;
-        float: right;
-        padding: 24px 0;
-  
-        :hover {
-          color: rgb(90, 214, 90);
-        }
-      }
+      width: 55px;
     }
   }
 }
