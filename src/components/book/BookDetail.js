@@ -9,10 +9,15 @@ class BookDetail extends React.Component {
     const {book} = this.props;
 
     return (
-      <div className="book-detail">
-        <BookTitle title={book.title} subTitle={book.subTitle} categories={book.categories}/>
-        <Tags tags={book.categories}/>
-        <BookRentalInformation rentalInformation = {book.bookRental} />
+      <div>
+        <div className="book-detail-img-box">
+          <img src={book.thumbnail} alt="책 썸네일"/>
+        </div>
+        <div className="book-detail">
+          <BookTitle title={book.title} subTitle={book.subTitle} categories={book.categories}/>
+          <Tags tags={book.categories}/>
+          <BookRentalInformation rentalInformation = {book.bookRental} />
+        </div>
       </div>
     )
   }

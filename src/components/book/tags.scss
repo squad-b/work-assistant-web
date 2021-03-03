@@ -1,8 +1,8 @@
-ul {
+.tag-container {
   display: inline;
 }
 
-li {
+.tag-container > li {
   float: left;
   margin-left: 5px;
 }

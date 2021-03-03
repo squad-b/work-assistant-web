@@ -14,7 +14,7 @@ class Tags extends React.Component {
   render() {
     const {tags} = this.props;
     return (
-      <ul>
+      <ul className='tag-container'>
         {tags.map((tag, idx) => <Tag key={idx} tag={tag}/>)}
       </ul>
     )
