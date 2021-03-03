@@ -1,15 +1,15 @@
 import React from "react";
 import welcome from "../../assets/img/welcome.png";
-import "./banner-section.scss"
+import "./welcome-section.scss"
 
-class BannerSection extends React.Component {
+class WelcomeSection extends React.Component {
   render() {
     return (
-      <div className="main-banner">
+      <div className="main-welcome">
         <img src={welcome} alt="" />
       </div>
     );
   }
 }
 
-export default BannerSection;
+export default WelcomeSection;

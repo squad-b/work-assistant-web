@@ -1,14 +1,14 @@
 import React from "react";
 import BookListSection from "../../components/main/BookListSection";
 import Layout from "../../components/common/Layout";
-import BannerSection from "../../components/main/BannerSection";
+import WelcomeSection from "../../components/main/WelcomeSection";
 
 class Index extends React.Component {
   render() {
     return (
       <div>
         <Layout>
-          <BannerSection/>
+          <WelcomeSection/>
           <BookListSection/>
         </Layout>
       </div>
