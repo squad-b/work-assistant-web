@@ -14,8 +14,8 @@ class NavBar extends React.Component {
           link: "#",
         },
         {
-          item: "로그인",
-          link: "#",
+          item: "마이 페이지",
+          link: "/myPage",
         }
       ],
     };
