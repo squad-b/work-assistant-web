@@ -1,6 +1,6 @@
 import React from "react";
 import {BrowserRouter, Route} from "react-router-dom";
-import Index from "../main/Index";
+import Index from "../../containers/Index";
 import MyPage from "../../containers/MyPage";
 import BookDetailPage from "../main/BookDetailPage";
 import BookAddPage from "../main/BookAddPage";
