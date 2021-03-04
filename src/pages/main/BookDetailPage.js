@@ -1,6 +1,7 @@
 import * as React from "react";
 import Book from "../../domain/book/Book";
 import BookDetail from "../../components/book/BookDetail";
+import Layout from "../../components/common/Layout";
 
 class BookDetailPage extends React.Component {
   render() {
@@ -13,7 +14,9 @@ class BookDetailPage extends React.Component {
       ['개발', '밥']);
     return (
       <div>
-        <BookDetail book={book}/>
+        <Layout>
+          <BookDetail book={book}/>
+        </Layout>
       </div>
     );
   }

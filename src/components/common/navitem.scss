@@ -1,0 +1,21 @@
+.main-nav-list {
+  width: 73%;
+  
+  .main-nav-box {
+    display: flex;
+    float: right;
+  
+    .main-nav-item {
+      width: 125px;
+      max-width: 350px;
+      text-align: center;
+      font-size: 16px;
+      float: right;
+      padding: 24px 0;
+  
+      :hover {
+        color: rgb(107, 209, 107);
+      }
+    }
+  }
+}
