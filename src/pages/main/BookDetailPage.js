@@ -1,12 +1,12 @@
 import * as React from "react";
 import Book from "../../domain/book/Book";
-import BookThumbnail from "../../components/book/BookThumbnail";
 import BookDetail from "../../components/book/BookDetail";
 import Layout from "../../components/common/Layout";
 
-class BookPage extends React.Component {
+class BookDetailPage extends React.Component {
   render() {
     const bookId = this.props.match.params.bookId;
+    if (isNaN(Number(bookId))) {return (<div/>);}
     const book = new Book(bookId,
       '밥 잘하는 법',
       '밥이 이렇게 맛있다고?',
@@ -15,7 +15,6 @@ class BookPage extends React.Component {
     return (
       <div>
         <Layout>
-          <BookThumbnail imgUrl={book.thumbnail}/>
           <BookDetail book={book}/>
         </Layout>
       </div>
@@ -23,4 +22,4 @@ class BookPage extends React.Component {
   }
 }
 
-export default BookPage;
+export default BookDetailPage;
