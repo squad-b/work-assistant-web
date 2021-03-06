@@ -1,6 +1,7 @@
 import * as React from "react";
 import BookSearchInput from "../../components/book/add/BookSearchInput";
 import BookSearchList from "../../components/book/add/BookSearchList";
+import Layout from "../../components/common/Layout";
 
 class BookAddPage extends React.Component {
   constructor(props) {
@@ -39,8 +40,10 @@ class BookAddPage extends React.Component {
   render() {
     return (
       <div>
-        <BookSearchInput onSearchButtonClick={this.onSearchButtonClick}/>
-        <BookSearchList searchBooks={this.state.searchBooks}/>
+        <Layout>
+          <BookSearchInput onSearchButtonClick={this.onSearchButtonClick}/>
+          <BookSearchList searchBooks={this.state.searchBooks}/>
+        </Layout>
       </div>
     )
   }
