@@ -6,7 +6,7 @@ class WelcomeSection extends React.Component {
   render() {
     return (
       <div className="main-welcome">
-        <img src={welcome} alt="" />
+        <img src={welcome} alt="아고 어서와" className="ago-img"/>
       </div>
     );
   }
