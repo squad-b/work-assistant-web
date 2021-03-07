@@ -1,7 +1,6 @@
 import React from "react";
 import "./book-card.scss"
 import { Link } from "react-router-dom";
-import { Tooltip } from "@material-ui/core";
 
 class BookCard extends React.Component {
   constructor(props) {
