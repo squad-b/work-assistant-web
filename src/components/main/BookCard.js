@@ -1,6 +1,7 @@
 import React from "react";
 import "./book-card.scss"
 import { Link } from "react-router-dom";
+import { Tooltip } from "@material-ui/core";
 
 class BookCard extends React.Component {
   constructor(props) {
@@ -13,17 +14,23 @@ class BookCard extends React.Component {
     }
   }
 
-  getBorrowStatusClassName = () => {
-    return this.book.stockQuantity > 0 ? "borrow-enable" : "borrow-unable"; 
+  getBorrowableStatusClassName = () => {
+    return this.book.stockQuantity > 0 ? "borrow borrow-enable" : "borrow borrow-unable";
+  }
+
+  getBorrowableStatus = () => {
+    return this.book.stockQuantity > 0 ? "대출 가능" : "대출 불가";
+    // return this.book.stockQuantity > 0 ? `대출 가능(${this.book.stockQuantity}권)` : "대출 불가";
   }
 
   render() {
     return (
       <div className="book-card">
         <Link to={'/books/' + this.book.id}>
-          <img className="book-thumbnail" src={this.book.imageUrl}></img>
-          <p className="book-title">{this.book.title}</p>
-          <p className={this.getBorrowStatusClassName()}>{this.book.stockQuantity}</p>
+            <img className="book-thumbnail" src={this.book.imageUrl}></img>
+              <p className="book-title">{this.book.title}</p>
+
+              <p className={this.getBorrowableStatusClassName()}>{this.getBorrowableStatus()}</p>
         </Link>
       </div>
     );
