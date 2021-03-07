@@ -11,7 +11,7 @@ class NavBar extends React.Component {
       navItems: [
         {
           item: "책 등록",
-          link: "#",
+          link: "/books/new",
         },
         {
           item: "마이 페이지",

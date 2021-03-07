@@ -1,6 +1,23 @@
+.book-search-bar {
+  margin: 50px 35px 0px 15px;
+
+  .restore-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+.book-category {
+  margin-top: 60px;
+  margin-left: 15px;
+  font-size: 20px;
+}
+
 .book-list-section {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
 }

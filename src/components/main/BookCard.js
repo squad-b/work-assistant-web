@@ -5,37 +5,33 @@ import { Link } from "react-router-dom";
 class BookCard extends React.Component {
   constructor(props) {
     super(props);
-    this.book = {
-      id: this.props.book.id,
-      title: this.props.book.title,
-      subtitle: this.props.book.subtitle,
-      thumbnail: this.props.book.thumbnail,
-      categories: this.props.book.categories,
-      borrower: this.props.book.borrower,
+    this.state = {
+      book: {
+        id: this.props.book.id,
+        title: this.props.book.title,
+        imageUrl: this.props.book.imageUrl,
+        stockQuantity: this.props.book.stockQuantity
+      }
     }
   }
 
-  getBorrowStatus = () => {
-    return this.book.borrower === "" ? "대츨 가능" : "대출 불가";
+  getBorrowableStatusClassName = () => {
+    return this.state.book.stockQuantity > 0 ? "borrow borrow-enable" : "borrow borrow-unable";
   }
 
-  getBorrowStatusClassName = () => {
-    return this.book.borrower === "" ? "borrow-enable" : "borrow-unable"; 
+  getBorrowableStatus = () => {
+    return this.state.book.stockQuantity > 0 ? "대출 가능" : "대출 불가";
+    // return this.book.stockQuantity > 0 ? `대출 가능(${this.book.stockQuantity}권)` : "대출 불가";
   }
 
   render() {
     return (
       <div className="book-card">
-        <Link to={'/books/' + this.book.id}>
-          <p>제목: {this.book.title}</p>
-          <p>부제목: {this.book.subtitle}</p>
-          <img className="book-thumbnail" src={this.book.thumbnail}></img>
-          <p> 카테고리: 
-            {this.book.categories.map((category) => {
-              return <span>{category} </span>
-            })}
-          </p>
-          <p className={this.getBorrowStatusClassName()}>{this.getBorrowStatus()}</p>
+        <Link to={'/books/' + this.state.book.id}>
+            <img className="book-thumbnail" src={this.state.book.imageUrl}></img>
+              <p className="book-title">{this.state.book.title}</p>
+
+              <p className={this.getBorrowableStatusClassName()}>{this.getBorrowableStatus()}</p>
         </Link>
       </div>
     );
