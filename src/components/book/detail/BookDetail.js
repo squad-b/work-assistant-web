@@ -3,6 +3,7 @@ import BookTitle from "./BookTitle";
 import Tags from "./Tags";
 import BookRentalInformation from "./BookRentalInformation";
 import './book-detail.scss'
+import BookRentalGrid from "./BookRentalGrid";
 
 class BookDetail extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class BookDetail extends React.Component {
           <Tags tags={book.categories}/>
           <BookRentalInformation rentalInformation = {book.bookRental} />
         </div>
+        <BookRentalGrid/>
       </div>
     )
   }
