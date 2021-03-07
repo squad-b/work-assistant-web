@@ -13,7 +13,7 @@ class Routes extends React.Component {
                     <Route exact path="/" component={Index}/>
                     <Route exact path="/myPage" component={MyPage}/>
                     <Route exact path="/books/new" component={BookAddPage}/>
-                    <Route exact path="/books/:bookId" component={BookDetailPage}/>
+                    <Route exact path="/books/:bookId(\d+)" component={BookDetailPage}/>
                 </BrowserRouter>
             </div>
         );
