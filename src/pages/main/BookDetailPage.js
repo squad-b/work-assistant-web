@@ -1,12 +1,11 @@
 import * as React from "react";
 import Book from "../../domain/book/Book";
-import BookDetail from "../../components/book/BookDetail";
+import BookDetail from "../../components/book/detail/BookDetail";
 import Layout from "../../components/common/Layout";
 
 class BookDetailPage extends React.Component {
   render() {
     const bookId = this.props.match.params.bookId;
-    if (isNaN(Number(bookId))) {return (<div/>);}
     const book = new Book(bookId,
       '밥 잘하는 법',
       '밥이 이렇게 맛있다고?',
