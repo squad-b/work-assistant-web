@@ -1,7 +1,13 @@
-import sampleAPI from "./sampleAPI";
+import axios from "axios";
 
-const API = Object.assign(sampleAPI());
-
-export default () => {
-  return API;
+const config = {
+  baseUrl: "http://localhost:8080/",
 };
+
+const searchBook = (query) => {
+  return axios.get(`${config.baseUrl}books?query=${query}`);
+}
+
+export {
+  searchBook
+}

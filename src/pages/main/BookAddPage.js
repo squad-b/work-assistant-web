@@ -2,6 +2,7 @@ import * as React from "react";
 import BookSearchInput from "../../components/book/add/BookSearchInput";
 import BookSearchList from "../../components/book/add/BookSearchList";
 import Layout from "../../components/common/Layout";
+import { searchBook } from '../../api/Index';
 
 class BookAddPage extends React.Component {
   constructor(props) {
@@ -49,6 +50,7 @@ class BookAddPage extends React.Component {
   }
 
   onSearchButtonClick = () => {
+    searchBook("리액트");
     this.setState({
       searchBooks: [
         {
