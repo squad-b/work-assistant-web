@@ -1,44 +1,42 @@
 import React from "react";
+import {Box} from "@material-ui/core";
+import {DataGrid} from "@material-ui/data-grid";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 class BorrowingBookList extends React.Component {
-  getBookList() {
-    return (
-      <table>
-        <thead>
-        <tr>
-          <th>▾</th>
-          <th>id</th>
-          <th>제목</th>
-          <th>대여일</th>
-        </tr>
-        </thead>
-        <tbody>
-        {this.props.bookList.map((book) => {
-          return (
-            <tr key={book.id}>
-              <td><input type="checkbox" /></td>
-              <td>{book.id}</td>
-              <td>{book.title}</td>
-              <td>{book.rentalDate}</td>
-            </tr>
-          )
-        })}
-        </tbody>
-      </table>
-    )
-  }
 
   returnBooks() {
     alert('반납요');
   }
 
   render() {
+    const columns = [
+      {field: 'id', headerName: 'ID', width: 70},
+      {field: 'title', headerName: '제목', width: 130},
+      {field: 'rentalDate', headerName: '대여일', width: 230}
+    ];
+
+    const rows = this.props.bookList;
+
     return (
-      <div>
-        <h2>대여 목록</h2>
-        {this.getBookList()}
-        <input type="button" value="반납" onClick={this.returnBooks.bind(this)} />
-      </div>
+      <Box m={5}>
+        <Typography variant="h5">
+          대여 목록
+        </Typography>
+        <Box style={{height: 350, width: '100%'}} mt={2}>
+          <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection/>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={this.returnBooks.bind(this)}
+          >
+            반납
+          </Button>
+        </Box>
+      </Box>
     );
   }
 }
