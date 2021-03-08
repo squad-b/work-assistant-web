@@ -1,7 +1,7 @@
 import * as React from "react";
 import BookDescription from "./BookDescription";
 import './book-detail.scss'
-import BookRentalGrid from "./BookRentalGrid";
+import BookRentalTable from "./BookRentalTable";
 
 class BookDetail extends React.Component {
   render() {
@@ -15,7 +15,7 @@ class BookDetail extends React.Component {
           <BookDescription book={book}/>
         </div>
         {/* 대여자 리스트 */}
-        <BookRentalGrid/>
+        <BookRentalTable/>
       </div>
     )
   }
