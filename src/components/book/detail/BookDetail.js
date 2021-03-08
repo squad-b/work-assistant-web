@@ -1,7 +1,5 @@
 import * as React from "react";
-import BookTitle from "./BookTitle";
-import Tags from "./Tags";
-import BookRentalInformation from "./BookRentalInformation";
+import BookDescription from "./BookDescription";
 import './book-detail.scss'
 import BookRentalGrid from "./BookRentalGrid";
 
@@ -11,14 +9,12 @@ class BookDetail extends React.Component {
 
     return (
       <div>
-        <div className="book-detail-img-box">
-          <img src={book.thumbnail} alt="책 썸네일"/>
-        </div>
+        {/*책 이미지 상세 정보*/}
         <div className="book-detail">
-          <BookTitle title={book.title} subTitle={book.subTitle} categories={book.categories}/>
-          <Tags tags={book.categories}/>
-          <BookRentalInformation rentalInformation = {book.bookRental} />
+          <img src={book.thumbnail} alt="책 썸네일"/>
+          <BookDescription book={book}/>
         </div>
+        {/* 대여자 리스트 */}
         <BookRentalGrid/>
       </div>
     )
