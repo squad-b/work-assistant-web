@@ -166,12 +166,12 @@ class BookListSection extends React.Component {
       isSearched: false
     }
 
-    this.state.bookListByCategory = this.getBookListByCategory();
+    this.state.bookListByCategory = this.getBookListByCategory(this.state.bookList);
   }
 
-  getBookListByCategory = () => {
+  getBookListByCategory = (bookList) => {
     const bookListByCategory = {};
-    this.state.bookList.forEach((book) => {
+    bookList.forEach((book) => {
       const categories = book.category.split(",");
 
       categories.forEach((category) => {
@@ -186,7 +186,7 @@ class BookListSection extends React.Component {
   }
 
   searchBook = (e) => {
-    const bookList = this.state.bookList;
+    const bookList = JSON.parse(JSON.stringify(this.state.bookList));
 
     for (let i = bookList.length - 1; i >= 0; i--) {
       if (!bookList[i].title.includes(e)) {
@@ -194,8 +194,7 @@ class BookListSection extends React.Component {
       }
     }
 
-    this.setState({ bookListByCategory: this.getBookListByCategory() });
-    this.isSearched = true;
+    this.setState({ bookListByCategory: this.getBookListByCategory(bookList) });
   }
 
   reload = () => {
@@ -207,13 +206,11 @@ class BookListSection extends React.Component {
     return (
       <div>
         <div className="book-search-bar">
-          {this.isSearched === true ? <div className="restore-search" onClick={this.reload}>되돌리기 &nbsp;<RestoreIcon fontSize="large"/></div> : 
-            <SearchBar
-              placeholder="책 제목을 입력해주세요 : )"
-              autoFocus
-              onRequestSearch={this.searchBook}
-            />
-          }
+          <SearchBar
+            placeholder="책 제목을 입력해주세요 : )"
+            autoFocus
+            onRequestSearch={this.searchBook}
+          />
         </div>
         {Object.keys(this.state.bookCategory).map((key, i) => {          
           return (
