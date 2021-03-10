@@ -1,6 +1,6 @@
 import React from "react";
 import "./book-card.scss"
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 class BookCard extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class BookCard extends React.Component {
     return (
       <div className="book-card">
         <Link to={'/books/' + this.state.book.id}>
-            <img className="book-thumbnail" src={this.state.book.imageUrl}></img>
+            <img className="book-thumbnail" src={this.state.book.imageUrl}/>
               <p className="book-title">{this.state.book.title}</p>
 
               <p className={this.getBorrowableStatusClassName()}>{this.getBorrowableStatus()}</p>

@@ -1,21 +1,21 @@
 import * as React from "react";
 import './search-book.scss';
-import BookSearchListItem from "./BookSearchListItem";
+import BookCard from "../../main/BookCard";
 
-class BookSearchList extends React.Component {
+class BookSearchResultList extends React.Component {
 
   render() {
     const searchBooks = this.props.searchBooks;
     return (
-      <ul>
+      <div className={'book-list-section'}>
         {searchBooks.map((book, idx) => {
           return (
-            <BookSearchListItem searchBook={book} key={idx}/>
+            <BookCard book={book} key={idx}/>
           )
         })}
-      </ul>
+      </div>
     )
   }
 }
 
-export default BookSearchList
+export default BookSearchResultList

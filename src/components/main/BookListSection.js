@@ -2,7 +2,6 @@ import React from "react";
 import BookCard from "./BookCard";
 import "./book-list-section.scss";
 import SearchBar from 'material-ui-search-bar';
-import RestoreIcon from '@material-ui/icons/Restore';
 
 class BookListSection extends React.Component {
   constructor(props) {
@@ -212,7 +211,7 @@ class BookListSection extends React.Component {
             onRequestSearch={this.searchBook}
           />
         </div>
-        {Object.keys(this.state.bookCategory).map((key, i) => {          
+        {Object.keys(this.state.bookCategory).map((key, i) => {
           return (
             <div> 
               <div>
@@ -221,7 +220,7 @@ class BookListSection extends React.Component {
               <div className="book-list-section">
                 {this.state.bookListByCategory[key] === undefined ? "" : 
                   this.state.bookListByCategory[key].map((book, j) => {
-                    return <BookCard book={book} key={j}></BookCard>
+                    return <BookCard book={book} key={j}/>
                   })}
               </div>
             </div>
