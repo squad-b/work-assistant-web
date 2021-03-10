@@ -1,18 +1,21 @@
 import React from "react";
-import {Box} from "@material-ui/core";
+import {Box, DialogContentText} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
+import Collapse from "@material-ui/core/Collapse";
 
 class Profile extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
+      invalid: false,
+      message: ''
     }
   }
 
@@ -31,11 +34,16 @@ class Profile extends React.Component {
         </Button>
         <Dialog
           open={this.state.open}
-          onClose={function () {this.setState({open: false})}.bind(this)}
+          onClose={function () {this.setState({open: false, invalid: false, message: ''})}.bind(this)}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">{"비밀번호 변경"}</DialogTitle>
+          <Collapse in={this.state.invalid}>
+            <Box ml={5}>
+              <DialogContentText color="error">{this.state.message}</DialogContentText>
+            </Box>
+          </Collapse>
           <DialogActions>
             <form>
               <TextField
@@ -67,11 +75,13 @@ class Profile extends React.Component {
                 }.bind(this)}
               />
               <Button onClick={function () {
-                if (this.state.password === this.state.passwordCheck) {
+                if (this.state.password === undefined || this.state.passwordCheck === undefined) {
+                  this.setState({invalid: true, message: '비밀번호를 입력해주세요.'})
+                } else if (this.state.password === this.state.passwordCheck) {
                   alert('변경요');
-                  this.setState({open: false})
+                  this.setState({open: false, invalid: false, message: ''})
                 } else {
-                  alert('안바꿔줘');
+                  this.setState({invalid: true, message: '비밀번호가 일치하지 않습니다.'})
                 }
               }.bind(this)} color="primary" autoFocus>
                 변경
