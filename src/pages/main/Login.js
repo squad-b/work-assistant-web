@@ -9,7 +9,6 @@ import Button from "@material-ui/core/Button";
 import miriAvatar from "../../assets/img/miri_avatar.png";
 import {ThemeProvider} from '@material-ui/styles';
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-import Footer from "../../components/common/Footer";
 import {Box} from "@material-ui/core";
 
 class Login extends React.Component {
