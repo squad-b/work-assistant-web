@@ -9,7 +9,7 @@ class BookSearchInput extends React.Component {
       <div>
         <div className="book-search-bar">
           <SearchBar
-            placeholder="책 isbn 또는 제목을 입력해주세요 😃"
+            placeholder="등록할 책 isbn 또는 제목을 입력해주세요 😃"
             autoFocus
             onRequestSearch={onSearchButtonClick}
           />

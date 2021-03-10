@@ -10,7 +10,7 @@ class BookSearchResultList extends React.Component {
       <div className={'book-list-section'}>
         {searchBooks.map((book, idx) => {
           return (
-            <BookCard book={book} key={idx}/>
+            <BookCard book={book} key={idx} register={true}/>
           )
         })}
       </div>
