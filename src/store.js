@@ -2,9 +2,10 @@ import {createStore} from 'redux';
 
 export default createStore(function (state, action) {
   if (state === undefined) {
+    const _currentUser = localStorage.getItem('currentUser');
     const rentalDate = new Date().toDateString();
     return {
-      currentUser: undefined,
+      currentUser: (_currentUser === null) ? null : JSON.parse(_currentUser),
       users : [
         {
           name: '채윤병',
@@ -48,6 +49,7 @@ export default createStore(function (state, action) {
           break;
         }
         _currentUser = user;
+        localStorage.setItem('currentUser', JSON.stringify(_currentUser));
         break;
       }
       i++;

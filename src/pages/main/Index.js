@@ -5,19 +5,24 @@ import Login from "../../containers/Login";
 import WelcomeSection from "../../components/main/WelcomeSection";
 
 class Index extends React.Component {
+
+  needLogin = () => {return this.props.user === null;}
+
+  renderLoginPage = () => {return <Login />}
+
+  renderMainPage = () => {
+    return (
+      <Layout>
+        <WelcomeSection/>
+        <BookListSection/>
+      </Layout>
+    );
+  }
+
   render() {
-      console.log('INDEX')
-    const mainPage = this.props.user === undefined
-                                    ? <Login/>
-                                    : (
-                                        <Layout>
-                                            <WelcomeSection/>
-                                            <BookListSection/>
-                                        </Layout>
-                                        )
     return (
       <div>
-        {mainPage}
+        {this.needLogin() ? this.renderLoginPage() : this.renderMainPage()}
       </div>
     );
   }
