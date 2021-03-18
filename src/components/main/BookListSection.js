@@ -2,7 +2,7 @@ import React from "react";
 import BookCard from "./BookCard";
 import "./book-list-section.scss";
 import SearchBar from 'material-ui-search-bar';
-import {fetchBookList} from '../../api/Index';
+import api from '../../api';
 
 class BookListSection extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class BookListSection extends React.Component {
       noThumbnailImageUrl: "https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png"
     }
 
-    fetchBookList()
+    api.get(`/books/list`)
       .then(response => {
         this.state.bookList = response.data;
         this.setState({ bookListByCategory: this.getBookListByCategory(this.state.bookList) });
