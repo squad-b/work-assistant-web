@@ -213,7 +213,7 @@ class BookListSection extends React.Component {
         </div>
         {Object.keys(this.state.bookCategory).map((key, i) => {
           return (
-            <div> 
+            <div key={i}> 
               <div>
                 <h3 className="book-category">{this.state.bookCategory[key]}</h3>
               </div>
