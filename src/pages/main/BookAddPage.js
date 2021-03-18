@@ -2,7 +2,7 @@ import * as React from "react";
 import BookSearchInput from "../../components/book/add/BookSearchInput";
 import BookSearchResultList from "../../components/book/add/BookSearchResultList";
 import Layout from "../../components/common/Layout";
-import {searchBook} from '../../api/Index';
+import api from '../../api';
 
 class BookAddPage extends React.Component {
   constructor(props) {
@@ -24,11 +24,11 @@ class BookAddPage extends React.Component {
   }
 
   onSearchButtonClick = async (query) => {
-    console.log(`query:${query}`)
-    const bookList = await searchBook("리액트");
-    this.setState({
-      searchBooks: bookList
-    })
+    const bookList = await api.get(`/books/?query=${query}`);
+    console.log(bookList);
+    // this.setState({
+    //   searchBooks: bookList
+    // })
   }
 }
 
