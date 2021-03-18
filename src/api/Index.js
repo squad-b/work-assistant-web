@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const config = {
   baseUrl: "http://localhost:8080/",
 };
@@ -23,6 +25,11 @@ const searchBook = (query) => {
   })
 }
 
+const fetchBookList = () => {
+  return axios.get(`${config.baseUrl}books/list`);
+}
+
 export {
-  searchBook
+  searchBook,
+  fetchBookList
 }
