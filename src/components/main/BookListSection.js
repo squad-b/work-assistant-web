@@ -196,11 +196,6 @@ class BookListSection extends React.Component {
     this.setState({ bookListByCategory: this.getBookListByCategory(bookList) });
   }
 
-  reload = () => {
-    // TODO: 인근, component만 reload 되게 하고 싶음
-    window.location.reload();
-  }
-
   render() {
     return (
       <div>
