@@ -4,6 +4,10 @@ import BookDetail from "../../components/book/detail/BookDetail";
 import Layout from "../../components/common/Layout";
 
 class BookDetailPage extends React.Component {
+  componentDidMount() {
+    window.scrollTo(0,0);
+  }
+  
   render() {
     const bookId = this.props.match.params.bookId;
     const book = new Book(bookId,
