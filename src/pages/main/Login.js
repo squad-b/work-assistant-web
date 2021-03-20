@@ -10,6 +10,8 @@ import miriAvatar from "../../assets/img/miri_avatar.png";
 import {ThemeProvider} from '@material-ui/styles';
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import {Box} from "@material-ui/core";
+import api from "../../api";
+import store from "../../store";
 
 class Login extends React.Component {
   constructor(props) {
@@ -18,6 +20,14 @@ class Login extends React.Component {
       email: '',
       password: ''
     }
+  }
+
+  login = async () => {
+    // TODO: 윤병, email, password 유효성 검사
+    const response = await api.post('/login', {email: this.state.email, password: this.state.password});
+    if (response.data === 'FAIL') alert('땡');
+    store.dispatch({type: 'LOGIN', isLogin: response.data === 'SUCCESS'});
+    this.props.history.push('/');
   }
 
   useMuiTheme() {
@@ -61,8 +71,8 @@ class Login extends React.Component {
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline/>
-        <Box className={classes.paper} mt={10} >
-          <Avatar className={classes.avatar} src={miriAvatar} />
+        <Box className={classes.paper} mt={10}>
+          <Avatar className={classes.avatar} src={miriAvatar}/>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
@@ -102,9 +112,7 @@ class Login extends React.Component {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={function () {
-                  this.props.login(this.state.email, this.state.password)
-                }.bind(this)}
+                onClick={this.login.bind(this)}
               >
                 Sign In
               </Button>
