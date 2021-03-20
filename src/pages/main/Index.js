@@ -6,7 +6,9 @@ import WelcomeSection from "../../components/main/WelcomeSection";
 
 class Index extends React.Component {
 
-  needLogin = () => {return this.props.user === null;}
+  needLogin = () => {
+    return this.props.user === null;
+  }
 
   renderLoginPage = () => {return <Login />}
 

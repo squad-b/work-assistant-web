@@ -1,60 +1,19 @@
 import {createStore} from 'redux';
+import Member from "./domain/member/Member";
+import api from "./api";
 
-export default createStore(function (state, action) {
+export default createStore((state, action) => {
   if (state === undefined) {
-    const _currentUser = localStorage.getItem('currentUser');
-    const rentalDate = new Date().toDateString();
-    return {
-      currentUser: (_currentUser === null) ? null : JSON.parse(_currentUser),
-      users : [
-        {
-          name: '채윤병',
-          email: 'yunbchae',
-          password: 'yunbchae',
-          bookList: [
-            {id: 1, title: 'title 1', rentalDate: rentalDate},
-            {id: 2, title: 'title 2', rentalDate: rentalDate},
-            {id: 3, title: 'title 3', rentalDate: rentalDate}
-          ]
-        },
-        {
-          name: '오민호',
-          email: 'mhoh',
-          password: 'mhoh',
-          bookList: [
-            {id: 1, title: 'title 1', rentalDate: rentalDate},
-            {id: 2, title: 'title 2', rentalDate: rentalDate}
-          ]
-        },
-        {
-          name: '유인근',
-          email: 'keun0390',
-          password: 'keun0390',
-          bookList: [
-            {id: 1, title: 'title 1', rentalDate: rentalDate}
-          ]
-        }
-      ]
-    }
+    const _currentUser = null;
+    // TODO: 윤병, GET /profile API 만들고 주석 제거
+    // const response = await api.get('/profile');
+    // const _currentUser = (response.data.result === "LOGIN_REQUIRED") ? null : new Member(response.data.member);
+    // return { currentUser: _currentUser }
+    return { currentUser: _currentUser }
   }
 
   if (action.type === 'LOGIN') {
-    let _currentUser;
-    let i = 0;
-    while(i < state.users.length) {
-      const user = state.users[i];
-      if (user.email === action.email) {
-        if (user.password !== action.password) {
-          alert('땡');
-          break;
-        }
-        _currentUser = user;
-        localStorage.setItem('currentUser', JSON.stringify(_currentUser));
-        break;
-      }
-      i++;
-    }
-    return {...state, currentUser: _currentUser}
+    return {...state, currentUser: new Member(action.member)}
   }
 
   return state;

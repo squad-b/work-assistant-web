@@ -97,7 +97,7 @@ class Login extends React.Component {
             />
             <ThemeProvider theme={buttonTheme}>
               <Button
-                type="submit"
+                type="button"
                 fullWidth
                 variant="contained"
                 color="primary"
