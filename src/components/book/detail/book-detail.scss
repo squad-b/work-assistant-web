@@ -2,6 +2,13 @@
   display: flex;
   margin-top: 30px;
 
+  .book-thumbnail {
+    width: 210px;
+    height: 280px;
+    border: solid rgb(231, 231, 231);
+    border-width: 0.5px;
+  }
+  
   img {
     width: 500px;
     margin-right: 20px;
