@@ -26,7 +26,7 @@ class Login extends React.Component {
     // TODO: 윤병, email, password 유효성 검사
     const response = await api.post('/login', {email: this.state.email, password: this.state.password});
     if (response.data === 'FAIL') alert('땡');
-    store.dispatch({type: 'LOGIN', isLogin: response.data === 'SUCCESS'});
+    store.dispatch({type: 'AUTHENTICATION', isLogin: response.data === 'SUCCESS'});
     this.props.history.push('/');
   }
 

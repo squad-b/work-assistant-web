@@ -2,11 +2,11 @@ import {createStore} from 'redux';
 
 export default createStore((state, action) => {
   if (state === undefined) {
-    // TODO: 윤병, 로그인 상태 확인 API 요청
-    return { isLogin: false }
+    return { isLogin: JSON.parse(localStorage.getItem('isLogin')) }
   }
 
-  if (action.type === 'LOGIN') {
+  if (action.type === 'AUTHENTICATION') {
+    localStorage.setItem('isLogin', JSON.stringify(action.isLogin));
     return {...state, isLogin: action.isLogin}
   }
 
