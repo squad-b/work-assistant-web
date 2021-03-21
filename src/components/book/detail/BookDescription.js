@@ -11,7 +11,7 @@ class BookDescription extends React.Component {
           <li>출판사 : <span>{book.publisher}</span></li>
           <li>출판일 : <span>{book.publishingDate}</span></li>
           <li>등록일 : <span>{book.registrationDate}</span></li>
-          <li>남은 수량 : <span>{book.stockQuantity}</span> <button>대여하기</button> </li>
+          <li>남은 수량 : <span>{book.stockQuantity}</span> {book.stockQuantity > 0 ? <button>대여하기</button> : ""}</li>
           <span className={""}>{book.description}</span>
         </ul>
       </div>
