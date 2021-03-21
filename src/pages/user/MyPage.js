@@ -6,6 +6,22 @@ import Typography from "@material-ui/core/Typography";
 import {Box} from "@material-ui/core";
 
 export default class MyPage extends React.Component {
+  constructor() {
+    super();
+    // TODO: 윤병, GET /myInfo API 날리기
+    this.state = {
+      user: {
+        email: 'test@test.com',
+        name: '아고',
+        bookList: [
+          { id: 1, title: 'test title 1', rentalDate: new Date().toDateString()},
+          { id: 2, title: 'test title 2', rentalDate: new Date().toDateString()},
+          { id: 3, title: 'test title 3', rentalDate: new Date().toDateString()}
+        ]
+      }
+    }
+  }
+
   render() {
     return (
       <Layout>
@@ -15,8 +31,8 @@ export default class MyPage extends React.Component {
           </Typography>
         </Box>
         <Box m={5}>
-          <Profile profile={this.props.user}/>
-          <BorrowingBookList bookList={this.props.user.bookList} />
+          <Profile profile={this.state.user}/>
+          <BorrowingBookList bookList={this.state.user.bookList} />
         </Box>
       </Layout>
     );
