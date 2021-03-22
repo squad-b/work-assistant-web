@@ -3,7 +3,7 @@ import SearchBar from "material-ui-search-bar";
 
 class BookSearchInput extends React.Component {
   render() {
-    const {onSearchButtonClick} = this.props
+    const {onSearchButtonClick, onChange} = this.props
 
     return (
       <div>
@@ -12,6 +12,7 @@ class BookSearchInput extends React.Component {
             placeholder="등록할 책 isbn 또는 제목을 입력해주세요 😃"
             autoFocus
             onRequestSearch={onSearchButtonClick}
+            onChange={onChange}
           />
         </div>
       </div>

@@ -9,19 +9,27 @@ class BookAddPage extends React.Component {
     super(props);
     this.state = {
       searchBooks: [],
-      fetching: false,
-      query: '',
-      page: 1,
-      pageSize: 10
     }
-    window.addEventListener("scroll", this.handleScroll);
+    this.fetching = false;
+    this.isEnd = false;
+    this.query = '';
+    this.page = 1;
+    this.size = 10;
+  }
+
+  componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   render() {
     return (
       <div>
         <Layout>
-          <BookSearchInput onSearchButtonClick={this.onSearchButtonClick}/>
+          <BookSearchInput onSearchButtonClick={this.onSearchButtonClick} onChange={this.onChange}/>
           <BookSearchResultList searchBooks={this.state.searchBooks}/>
         </Layout>
       </div>
@@ -29,24 +37,30 @@ class BookAddPage extends React.Component {
   }
 
   onSearchButtonClick = async (query) => {
-    if (this.state.query !== query) {
-      this.setState({
-        query: query,
-        page: 1,
-      })
+
+    if (!query) {return;}
+    this.fetching = true
+
+    if (this.query !== query) {
+      this.page = 1
+      this.isEnd = false
     }
 
-    this.setState({
-      fetching: true
-    })
-
-    const booksResponse = await api.get(`/books/?query=${this.state.query}&page=${this.state.page}`);
+    const booksResponse = await api.get(`/books/?query=${query}&page=${this.page}&size=${this.size}`);
     const bookList = booksResponse.data.documents;
 
-    this.setState({
-      searchBooks: this.state.searchBooks.concat(...bookList),
-      page: this.state.page + 1
-    })
+    const addBookList = this.query === query ? this.state.searchBooks.concat(...bookList) : bookList
+
+    if (bookList) {
+      this.setState({searchBooks: addBookList})
+      if (bookList.length >= this.size) {
+        this.page = this.page + 1
+      } else {
+        this.isEnd = true
+      }
+    }
+    this.fetching = false
+    this.query = query;
   }
 
   handleScroll = () => {
@@ -54,9 +68,9 @@ class BookAddPage extends React.Component {
     const scrollTop = document.documentElement.scrollTop;
     const clientHeight = document.documentElement.clientHeight;
 
-    if (scrollTop + clientHeight >= scrollHeight && this.state.fetching === false) {
+    if (scrollTop + clientHeight >= scrollHeight && this.fetching === false && this.isEnd === false) {
       // 페이지 끝에 도달하면 추가 데이터를 받아온다
-      this.onSearchButtonClick(this.state.query);
+      this.onSearchButtonClick(this.query);
     }
   };
 }
