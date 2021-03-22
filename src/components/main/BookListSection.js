@@ -7,7 +7,7 @@ import api from '../../api';
 class BookListSection extends React.Component {
   constructor(props) {
     super(props);
-    // TODO: 인근, API 호출로 책 목록 가져오기
+
     this.state = {
       bookList: [],
       bookListByCategory: [],
@@ -23,18 +23,24 @@ class BookListSection extends React.Component {
         "NONFICTION": "비소설"
       },
       isSearched: false,
-      noThumbnailImageUrl: "https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png"
+      noThumbnailImageUrl: "https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png" // TODO: 전역으로 관리하기(redux?) 
     }
+  }
 
+  componentDidMount() {
+    this.fetchBookList();
+  }
+
+  fetchBookList = () => {
     api.get(`/books/list`)
-      .then(response => {
-        this.state.bookList = response.data;
-        this.setState({ bookListByCategory: this.getBookListByCategory(this.state.bookList) });
-      })
-      .catch(error => {
-        console.log("책 목록 조회 API 사용중 에러 발생");
-        console.log(error);
-      })
+    .then(response => {
+      this.state.bookList = response.data;
+      this.setState({ bookListByCategory: this.getBookListByCategory(this.state.bookList) });
+    })
+    .catch(error => {
+      console.log("책 목록 조회 API 사용중 에러 발생");
+      console.log(error);
+    })
   }
 
   getBookListByCategory = (bookList) => {
