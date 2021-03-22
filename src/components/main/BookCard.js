@@ -16,7 +16,7 @@ class BookCard extends React.Component {
   renderCardLinkedDetail = (book) => {
     return (
       <Link to={'/books/' + book.id}>
-        <img className="book-thumbnail" src={book.imageUrl} alt="책 썸네일"/>
+        <img className="book-thumbnail" src={book.thumbnail} alt="책 썸네일"/>
         <p className="book-title">{book.title}</p>
         <p className={this.getBorrowableStatusClassName(book)}>{this.getBorrowableStatus(book)}</p>
       </Link>
@@ -26,7 +26,7 @@ class BookCard extends React.Component {
   renderCardForRegister = (book) => {
     return (
       <div>
-        <img className="book-thumbnail" src={book.imageUrl} alt="책 썸네일"/>
+        <img className="book-thumbnail" src={book.thumbnail} alt="책 썸네일"/>
         <p className="book-title">{book.title}</p>
         <p className="book-publisher">{book.publisher}</p>
         <p className="book-register">등록하기</p>
@@ -36,9 +36,12 @@ class BookCard extends React.Component {
 
   render() {
     const {book, register} = this.props
+    if (!book.thumbnail) {book.thumbnail = 'https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png';}
+    if (book.title && book.title.length > 10) {book.title = book.title.substring(0, 15) + '...'}
+    if (book.publisher && book.publisher.length > 10) {book.publisher = book.publisher.substring(0, 15) + '...'}
     return (
       <div className="book-card">
-        {!register ? this.renderCardLinkedDetail(book) : this.renderCardForRegister(book)}
+          {!register ? this.renderCardLinkedDetail(book) : this.renderCardForRegister(book)}
       </div>
     );
   }
