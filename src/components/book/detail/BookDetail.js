@@ -2,7 +2,7 @@ import * as React from "react";
 import BookDescription from "./BookDescription";
 import './book-detail.scss'
 import BookRentalTable from "./BookRentalTable";
-import api from '../../../api';
+import api from '../../../api'
 
 class BookDetail extends React.Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class BookDetail extends React.Component {
           <BookDescription book={this.state.book}/>
         </div>
         {/* 대여자 리스트 */}
-        <BookRentalTable/>
+        <BookRentalTable bookId={this.props.bookId}/>
       </div>
     )
   }

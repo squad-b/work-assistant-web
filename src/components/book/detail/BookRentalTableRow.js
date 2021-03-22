@@ -6,7 +6,7 @@ class BookRentalTableRow extends React.Component {
     const {bookRental} = this.props;
     return (
       <TableRow>
-        <TableCell>{bookRental.name}</TableCell>
+        <TableCell>{bookRental.borrowerName}</TableCell>
         <TableCell>{bookRental.isLongTerm ? '🅾️' : '❎'}</TableCell>
         <TableCell>{bookRental.startDate}</TableCell>
         <TableCell>{bookRental.endDate}</TableCell>
