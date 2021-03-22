@@ -36,7 +36,7 @@ class BookRentalTable extends React.Component {
         <Table>
           <TableHead>
             <TableRow>
-            {columns.map((col, idx) => {return <TableCell>{col}</TableCell>})}
+            {columns.map((col, idx) => {return <TableCell key = {idx}>{col}</TableCell>})}
             </TableRow>
           </TableHead>
           <TableBody>
