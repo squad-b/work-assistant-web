@@ -20,26 +20,29 @@ class BookAddPopup extends React.Component {
     super(props);
     this.state = {
       bookCategory: 'DEVELOP',
-      stockQuantity: 1
+      stockQuantity: 1,
+      open : false
     }
   }
 
   render() {
-    const {open} = this.props
     const onChange = (e) => {
       const bookCategory = e.target.value
       this.setState({bookCategory : bookCategory})
     }
 
+
+    const {open, book, onClose} = this.props
+
     return (
-        <Dialog open={open} fullWidth={true} maxWidth='sm' aria-labelledby={"book-add-popup-title"}>
+        <Dialog open={open} fullWidth={true} maxWidth='sm' aria-labelledby={"book-add-popup-title"} onClose={onClose}>
           <DialogTitle id={"book-add-popup-title"}>책 등록</DialogTitle>
           <DialogContent>
             <form className={'book-add-popup-form'} noValidate>
               <DialogContentText>
                 책 이름
               </DialogContentText>
-              <img className={'book-thumbnail'} src={'https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png'}/>
+              <img className={'book-thumbnail'} src={book ? book.thumbnail: 'https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png'}/>
               <FormControl className={'form-control'}>
                 <InputLabel htmlFor='category'>책 카테고리</InputLabel>
                 <Select autoFocus value={this.state.bookCategory} inputProps={{name:'book-category', id:'book-category'}} onChange={onChange}>
