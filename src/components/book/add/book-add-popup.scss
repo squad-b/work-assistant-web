@@ -1,0 +1,10 @@
+.book-add-popup-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: fit-content;
+
+  .form-control {
+    min-width: 120px;
+  }
+}

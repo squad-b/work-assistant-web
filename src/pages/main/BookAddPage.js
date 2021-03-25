@@ -2,13 +2,14 @@ import * as React from "react";
 import BookSearchInput from "../../components/book/add/BookSearchInput";
 import BookSearchResultList from "../../components/book/add/BookSearchResultList";
 import Layout from "../../components/common/Layout";
-import api from '../../api';
+import BookAddPopup from "../../components/book/add/BookAddPopup";
 
 class BookAddPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       searchBooks: [],
+      popupOpen: false
     }
     this.fetching = false;
     this.isEnd = false;
@@ -31,6 +32,7 @@ class BookAddPage extends React.Component {
         <Layout>
           <BookSearchInput onSearchButtonClick={this.onSearchButtonClick} onChange={this.onChange}/>
           <BookSearchResultList searchBooks={this.state.searchBooks}/>
+          <BookAddPopup open={this.state.popupOpen}/>
         </Layout>
       </div>
     )
