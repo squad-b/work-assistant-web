@@ -10,7 +10,8 @@ class BookAddPage extends React.Component {
     super(props);
     this.state = {
       searchBooks: [],
-      popupOpen: false
+      popupOpen: false,
+      selectedBook: {}
     }
     this.fetching = false;
     this.isEnd = false;
@@ -33,16 +34,22 @@ class BookAddPage extends React.Component {
         <Layout>
           <BookSearchInput onSearchButtonClick={this.onSearchButtonClick}/>
           <BookSearchResultList searchBooks={this.state.searchBooks} onClickCard={this.onClickHandler}/>
-          <BookAddPopup open={this.state.popupOpen}/>
+          <BookAddPopup open={this.state.popupOpen}  book={this.state.selectedBook} onClose={this.onClosePopup}/>
         </Layout>
       </div>
     )
   }
 
   onClickHandler = (book) => {
-    console.log(book)
     this.setState({
-      popupOpen: !this.state.popupOpen
+      popupOpen: true,
+      selectedBook: book
+    })
+  }
+
+  onClosePopup = () => {
+    this.setState({
+      popupOpen: false
     })
   }
 
