@@ -3,6 +3,7 @@ import BookSearchInput from "../../components/book/add/BookSearchInput";
 import BookSearchResultList from "../../components/book/add/BookSearchResultList";
 import Layout from "../../components/common/Layout";
 import BookAddPopup from "../../components/book/add/BookAddPopup";
+import api from "../../api";
 
 class BookAddPage extends React.Component {
   constructor(props) {
@@ -30,12 +31,19 @@ class BookAddPage extends React.Component {
     return (
       <div>
         <Layout>
-          <BookSearchInput onSearchButtonClick={this.onSearchButtonClick} onChange={this.onChange}/>
-          <BookSearchResultList searchBooks={this.state.searchBooks}/>
+          <BookSearchInput onSearchButtonClick={this.onSearchButtonClick}/>
+          <BookSearchResultList searchBooks={this.state.searchBooks} onClickCard={this.onClickHandler}/>
           <BookAddPopup open={this.state.popupOpen}/>
         </Layout>
       </div>
     )
+  }
+
+  onClickHandler = (book) => {
+    console.log(book)
+    this.setState({
+      popupOpen: !this.state.popupOpen
+    })
   }
 
   onSearchButtonClick = async (query) => {
