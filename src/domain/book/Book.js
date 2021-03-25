@@ -1,10 +1,10 @@
 class Book {
-  constructor(id, isbn, title, author, publisher, thumbnail, stockQuantity,
+  constructor(id, isbn, title, authors, publisher, thumbnail, stockQuantity,
               description, publishingDate, registrationDate) {
     this.id = id;
     this.isbn = isbn;
     this.title = title;
-    this.author = author;
+    this.author = authors;
     this.publisher = publisher;
     this.thumbnail = thumbnail;
     this.stockQuantity = stockQuantity;
