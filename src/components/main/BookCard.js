@@ -9,8 +9,8 @@ class BookCard extends React.Component {
   }
 
   getBorrowableStatus = (book) => {
-    return book.stockQuantity > 0 ? "대출 가능" : "대출 불가";
-    // return this.book.stockQuantity > 0 ? `대출 가능(${this.book.stockQuantity}권)` : "대출 불가";
+    return book.stockQuantity > 0 ? "대여가능" : "대여불가";
+    // return this.book.stockQuantity > 0 ? `대여 가능(${this.book.stockQuantity}권)` : "대여 불가";
   }
 
   renderCardLinkedDetail = (book) => {
