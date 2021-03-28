@@ -12,13 +12,14 @@ class Routes extends React.Component {
 
   componentDidMount() {
     // TODO: 윤병, 페이지 렌더링 되기 전에 세션 체크하고 싶은데 비동기가 넘나 어려움...
-    let isLogin = store.getState().isLogin;
-    if (!isLogin) return ;
+    const isLogin = store.getState().memberId;
+    if (!isLogin) return;
 
     api.get('/auth').then(response => {
-      isLogin = response.data === 'AUTHORIZED';
-      if (!isLogin) {
-        store.dispatch({type: 'AUTHENTICATION', isLogin: false});
+      if (response.data.result === 'SUCCESS') {
+        store.dispatch({type: 'AUTHENTICATION', memberId: response.data.memberId});
+      } else {
+        store.dispatch({type: 'AUTHENTICATION'});
         alert('세션이 만료되었습니다.');
         window.location.href = '/login';
       }
@@ -26,9 +27,9 @@ class Routes extends React.Component {
   }
 
   renderPage(component: Component, isLoginPage: Boolean) {
-    const isLogin = store.getState().isLogin;
+    const isLogin = store.getState().memberId;
     if (isLoginPage) {
-      return isLogin? <Redirect to='/'/> : component;
+      return isLogin ? <Redirect to='/'/> : component;
     }
     return isLogin ? component : <Redirect to='/login'/>;
   }
