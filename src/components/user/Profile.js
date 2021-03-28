@@ -26,8 +26,8 @@ class Profile extends React.Component {
           프로필
         </Typography>
         <Typography variant="h6">
-          <Box m={2}>{this.props.profile.name}</Box>
-          <Box m={2}>{this.props.profile.email}</Box>
+          <Box m={2}>{this.props.user.name}</Box>
+          <Box m={2}>{this.props.user.email}</Box>
         </Typography>
         <Button type="button" onClick={function () {this.setState({open: true});}.bind(this)}>
           비밀번호 변경
