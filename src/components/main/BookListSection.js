@@ -32,7 +32,7 @@ class BookListSection extends React.Component {
   }
 
   fetchBookList = () => {
-    api.get(`/books/list`)
+    api.get(`/books`)
     .then(response => {
       this.state.bookList = response.data;
       this.setState({ bookListByCategory: this.getBookListByCategory(this.state.bookList) });
