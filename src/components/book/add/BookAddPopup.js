@@ -33,9 +33,8 @@ class BookAddPopup extends React.Component {
     }
 
     const onClickRegisterButton = async (book) => {
-      console.log(book.isbn)
       const res = await api.post("/books", {
-        isbn: book.isbn.split(' ')[0],
+        isbn: book.isbn.split(' ')[1],
         title: book.title,
         description: book.contents,
         author: book.authors[0],
@@ -45,8 +44,13 @@ class BookAddPopup extends React.Component {
         imageUrl: book.thumbnail,
         stockQuantity: this.state.stockQuantity
       });
-      console.log(res)
-      alert(res.data)
+      if (res.data.result === "SUCCESS") {
+        alert("등록 완료")
+        onClose()
+      }
+      if (res.data.result === "KEY_DUPLICATION") {
+        alert("이미 등록된 책 입니다.")
+      }
     }
 
     const {open, book, onClose} = this.props
