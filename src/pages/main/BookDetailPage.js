@@ -1,5 +1,4 @@
 import * as React from "react";
-import Book from "../../domain/book/Book";
 import BookDetail from "../../components/book/detail/BookDetail";
 import Layout from "../../components/common/Layout";
 
