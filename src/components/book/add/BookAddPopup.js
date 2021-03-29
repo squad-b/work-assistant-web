@@ -44,23 +44,29 @@ class BookAddPopup extends React.Component {
     }
 
     const onClickRegisterButton = async (book) => {
-      const res = await api.post("/books", {
-        isbn: book.isbn.split(' ')[1],
-        title: book.title,
-        description: book.contents,
-        author: book.authors[0],
-        publishingDate: book.datetime,
-        publisher: book.publisher,
-        category: this.state.bookCategory,
-        imageUrl: book.thumbnail,
-        stockQuantity: this.state.stockQuantity
-      });
-      if (res.data.result === "SUCCESS") {
-        alert("등록 완료")
-        onClose()
-      }
-      if (res.data.result === "KEY_DUPLICATION") {
-        alert("이미 등록된 책 입니다.")
+      try {
+        const res = await api.post("/books", {
+          isbn: book.isbn.split(' ')[1],
+          title: book.title,
+          description: book.contents,
+          author: book.authors[0],
+          publishingDate: book.datetime,
+          publisher: book.publisher,
+          category: this.state.bookCategory,
+          imageUrl: book.thumbnail,
+          stockQuantity: this.state.stockQuantity
+        });
+        if (res.data.result === "SUCCESS") {
+          alert("등록 완료")
+          onClose()
+        }
+        if (res.data.result === "KEY_DUPLICATION") {
+          alert("이미 등록된 책 입니다.")
+        }
+      } catch (e) {
+        if (e.response.status === 403) {
+          alert("관리자만 등록할 수 있습니다.")
+        }
       }
     }
 
