@@ -27,9 +27,20 @@ class BookAddPopup extends React.Component {
   }
 
   render() {
-    const onChange = (e) => {
+    const onChangeCategory = (e) => {
       const bookCategory = e.target.value
       this.setState({bookCategory : bookCategory})
+    }
+
+    const onChangeStockQuantity = (e) => {
+      const stockQuantity = e.target.value
+      if (stockQuantity < 1) {
+        alert("1 보다 큰 값을 넣어주세요")
+        return
+      }
+      this.setState({
+        stockQuantity: stockQuantity
+      })
     }
 
     const onClickRegisterButton = async (book) => {
@@ -66,7 +77,7 @@ class BookAddPopup extends React.Component {
             <img className={'book-thumbnail'} src={book ? book.thumbnail: 'https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png'}/>
             <FormControl className={'form-control'}>
               <InputLabel htmlFor='category'>책 카테고리</InputLabel>
-              <Select autoFocus value={this.state.bookCategory} inputProps={{name:'book-category', id:'book-category'}} onChange={onChange}>
+              <Select autoFocus value={this.state.bookCategory} inputProps={{name:'book-category', id:'book-category'}} onChange={onChangeCategory}>
                 <MenuItem value={'DEVELOP'}>개발</MenuItem>
                 <MenuItem value={'MANAGEMENT'}>경영</MenuItem>
                 <MenuItem value={'PLAN'}>기획</MenuItem>
@@ -83,6 +94,7 @@ class BookAddPopup extends React.Component {
               label="수량"
               type="number"
               value={this.state.stockQuantity}
+              onChange={onChangeStockQuantity}
             />
           </form>
           <DialogActions>
