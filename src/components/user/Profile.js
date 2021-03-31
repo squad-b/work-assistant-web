@@ -7,6 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Collapse from "@material-ui/core/Collapse";
+import api from "../../api";
+import store from "../../store";
 
 class Profile extends React.Component {
 
@@ -17,6 +19,32 @@ class Profile extends React.Component {
       invalid: false,
       message: ''
     }
+  }
+
+  isValidPassword = password => {
+    return password !== undefined && password.length > 0
+  }
+
+  changePassword = async () => {
+    if (!this.isValidPassword(this.state.password) || !this.isValidPassword(this.state.passwordCheck)) {
+      this.setState({invalid: true, message: '비밀번호를 입력해주세요.'})
+      return;
+    }
+    if (this.state.password !== this.state.passwordCheck) {
+      this.setState({invalid: true, message: '비밀번호가 일치하지 않습니다.'})
+      return;
+    }
+
+    const memberId = store.getState().memberId;
+    try {
+      const response = await api.put(`/members/${memberId}`, {password: this.state.password});
+      if(response.data === 'SUCCESS') {
+        alert('비밀번호가 변경되었습니다 😇');
+      }
+    } catch (e) {
+      alert('비밀번호가 안변경되었습니다 🤡');
+    }
+    this.setState({open: false, invalid: false, message: ''})
   }
 
   render() {
@@ -74,16 +102,7 @@ class Profile extends React.Component {
                   this.setState({passwordCheck: e.target.value})
                 }.bind(this)}
               />
-              <Button onClick={function () {
-                if (this.state.password === undefined || this.state.passwordCheck === undefined) {
-                  this.setState({invalid: true, message: '비밀번호를 입력해주세요.'})
-                } else if (this.state.password === this.state.passwordCheck) {
-                  alert('변경요');
-                  this.setState({open: false, invalid: false, message: ''})
-                } else {
-                  this.setState({invalid: true, message: '비밀번호가 일치하지 않습니다.'})
-                }
-              }.bind(this)} color="primary" autoFocus>
+              <Button onClick={this.changePassword.bind(this)} color="primary" autoFocus>
                 변경
               </Button>
             </form>

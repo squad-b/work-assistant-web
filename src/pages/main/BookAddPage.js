@@ -33,14 +33,14 @@ class BookAddPage extends React.Component {
       <div>
         <Layout>
           <BookSearchInput onSearchButtonClick={this.onSearchButtonClick}/>
-          <BookSearchResultList searchBooks={this.state.searchBooks} onClickCard={this.onClickHandler}/>
+          <BookSearchResultList searchBooks={this.state.searchBooks} onClickCard={this.onClickBookCard}/>
           <BookAddPopup open={this.state.popupOpen}  book={this.state.selectedBook} onClose={this.onClosePopup}/>
         </Layout>
       </div>
     )
   }
 
-  onClickHandler = (book) => {
+  onClickBookCard = (book) => {
     this.setState({
       popupOpen: true,
       selectedBook: book
