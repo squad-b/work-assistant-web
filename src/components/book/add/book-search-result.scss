@@ -1,0 +1,19 @@
+.no-result {
+  margin-top: 45px;
+  margin-bottom: calc(100vh - 463px);
+}
+
+.less-than-five-item-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 45px;
+  margin-bottom: calc(100vh - 805px);
+}
+
+.more-than-five-item-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 45px;
+}

@@ -63,7 +63,7 @@ class BookAddPage extends React.Component {
       this.isEnd = false
     }
 
-    const booksResponse = await api.get(`/books/?query=${query}&page=${this.page}&size=${this.size}`);
+    const booksResponse = await api.get(`/search/books/?query=${query}&page=${this.page}&size=${this.size}`);
     const bookList = booksResponse.data.documents;
 
     const addBookList = this.query === query ? this.state.searchBooks.concat(...bookList) : bookList
