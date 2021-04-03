@@ -8,40 +8,33 @@ import api from "../../api";
 import store from "../../store";
 
 export default class MyPage extends React.Component {
-  constructor() {
-    super();
-    const dummyBookList = [
-      { id: 1, title: 'test title 1', rentalDate: new Date().toDateString()},
-      { id: 2, title: 'test title 2', rentalDate: new Date().toDateString()},
-      { id: 3, title: 'test title 3', rentalDate: new Date().toDateString()}
-    ];
+  constructor(props) {
+    super(props);
     this.state = {
       user: {
         email: '',
         name: '',
-        bookList: dummyBookList
+        borrowingBookList: []
       }
     }
-    const memberId = store.getState().memberId;
-    api.get(`/members/${memberId}/profile`).then(response => {
-      this.setState({
-        user: {
-          email: response.data.email,
-          name: response.data.name,
-          bookList: dummyBookList
-        }
-      });
-    });
   }
 
-  // getProfile = async () => {
-  //   const memberId = store.getState().memberId;
-  //   const response = await api.get(`/members/${memberId}/profile`);
-  //   return {
-  //     email: response.data.email,
-  //     name: response.data.name
-  //   };
-  // }
+  componentDidMount() {
+    this.fetchProfile();
+  }
+
+  fetchProfile = async () => {
+     await api.get(`/members/${store.getState().memberId}/profile`)
+        .then(response => {
+          this.state.user.email = response.data.email;
+          this.state.user.name = response.data.name;
+          this.setState({ user: this.state.user });
+        })
+        .catch(error => {
+          console.log("유저 프로필 조회 API 사용중 에러 발생");
+          console.log(error);
+        })
+  }
 
   render() {
     return (
@@ -53,7 +46,7 @@ export default class MyPage extends React.Component {
         </Box>
         <Box m={5}>
           <Profile user={this.state.user}/>
-          <BorrowingBookList bookList={this.state.user.bookList} />
+          <BorrowingBookList bookList={this.state.user.borrowingBookList} />
         </Box>
       </Layout>
     );
