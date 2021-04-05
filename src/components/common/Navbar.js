@@ -1,12 +1,19 @@
 import React from "react";
 import NavItem from "./NavItem";
-import { Link } from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import "./navbar.scss";
 import coin from "../../assets/img/coin.svg";
+import api from "../../api";
 
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
+
+    const logout = async () => {
+      await api.post("/logout")
+      window.location.href = "/"
+    }
+
     this.state = {
       navItems: [
         {
@@ -16,6 +23,10 @@ class NavBar extends React.Component {
         {
           item: "마이 페이지",
           link: "/myPage",
+        },
+        {
+          item: "로그아웃",
+          onClick: logout
         }
       ],
     };
@@ -41,4 +52,4 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
