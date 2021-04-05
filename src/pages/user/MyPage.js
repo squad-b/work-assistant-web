@@ -14,12 +14,13 @@ export default class MyPage extends React.Component {
       user: {
         email: '',
         name: '',
+      },
         borrowingBookList: []
-      }
     }
   }
 
   componentDidMount() {
+    this.fetchBookRentals();
     this.fetchProfile();
   }
 
@@ -36,6 +37,19 @@ export default class MyPage extends React.Component {
         })
   }
 
+  fetchBookRentals = async () => {
+    await api.get(`/members/${store.getState().memberId}/rentals`)
+        .then(response => {
+          const borrowingBookList = response.data;
+          this.setState({ borrowingBookList: borrowingBookList });
+          console.log('aaaa', borrowingBookList);
+        })
+        .catch(error => {
+          console.log("유저 대여 목록 조회 API 사용중 에러 발생");
+          console.log(error);
+        })
+  }
+
   render() {
     return (
       <Layout>
@@ -46,7 +60,7 @@ export default class MyPage extends React.Component {
         </Box>
         <Box m={5}>
           <Profile user={this.state.user}/>
-          <BorrowingBookList bookList={this.state.user.borrowingBookList} />
+          <BorrowingBookList bookList={this.state.borrowingBookList} />
         </Box>
       </Layout>
     );
