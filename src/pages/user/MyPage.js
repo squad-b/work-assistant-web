@@ -15,7 +15,7 @@ export default class MyPage extends React.Component {
         email: '',
         name: '',
       },
-        borrowingBookList: []
+      borrowingBookList: []
     }
   }
 
