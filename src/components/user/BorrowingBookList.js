@@ -5,19 +5,26 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 class BorrowingBookList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      rows: this.props.bookList
+    }
+  }
 
   returnBooks() {
     alert('반납요');
   }
 
   render() {
+    const {bookList} = this.props;
     const columns = [
       {field: 'id', headerName: 'ID', width: 70},
-      {field: 'title', headerName: '제목', width: 130},
-      {field: 'rentalDate', headerName: '대여일', width: 230}
+      {field: 'bookTitle', headerName: '책 제목', width: 130},
+      {field: 'isLongTerm', headerName: '장기대여', width: 150},
+      {field: 'startDate', headerName: '대여 시작', width: 150},
+      {field: 'endDate', headerName: '대여 끝', width: 150}
     ];
-
-    const rows = this.props.bookList;
 
     return (
       <Box m={5}>
@@ -25,7 +32,7 @@ class BorrowingBookList extends React.Component {
           대여 목록
         </Typography>
         <Box style={{height: 350, width: '100%'}} mt={2}>
-          <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection/>
+          <DataGrid rows={bookList} columns={columns} pageSize={5} checkboxSelection/>
           <Button
             type="submit"
             fullWidth
