@@ -42,7 +42,6 @@ export default class MyPage extends React.Component {
         .then(response => {
           const borrowingBookList = response.data;
           this.setState({ borrowingBookList: borrowingBookList });
-          console.log('aaaa', borrowingBookList);
         })
         .catch(error => {
           console.log("유저 대여 목록 조회 API 사용중 에러 발생");
