@@ -20,7 +20,7 @@ export default class MyPage extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchBookRentals();
+    this.fetchOnRentalBooks();
     this.fetchProfile();
   }
 
@@ -37,8 +37,8 @@ export default class MyPage extends React.Component {
         })
   }
 
-  fetchBookRentals = async () => {
-    await api.get(`/members/${store.getState().memberId}/rentals`)
+  fetchOnRentalBooks = async () => {
+    await api.get(`/members/${store.getState().memberId}/rentals?status=ON_RENTAL`)
         .then(response => {
           const borrowingBookList = response.data;
           this.setState({ borrowingBookList: borrowingBookList });
