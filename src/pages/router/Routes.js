@@ -17,9 +17,14 @@ class Routes extends React.Component {
 
     api.get('/auth').then(response => {
       if (response.data.result === 'SUCCESS') {
-        store.dispatch({type: 'AUTHENTICATION', memberId: response.data.memberId});
+        store.dispatch({
+          type: 'AUTHENTICATION',
+          memberId: response.data.loginMember.id,
+          memberType: response.data.loginMember.type
+        });
       } else {
         store.dispatch({type: 'AUTHENTICATION'});
+        localStorage.clear();
         alert('세션이 만료되었습니다.');
         window.location.href = '/login';
       }
