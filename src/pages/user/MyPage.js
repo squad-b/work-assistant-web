@@ -41,7 +41,8 @@ export default class MyPage extends React.Component {
     await api.get(`/members/${store.getState().memberId}/rentals?status=ON_RENTAL`)
         .then(response => {
           const borrowingBookList = response.data;
-          this.setState({ borrowingBookList: borrowingBookList });
+            borrowingBookList.forEach(book => book.isLongTerm = book.isLongTerm ? '🅾️' : '❎');
+            this.setState({ borrowingBookList: borrowingBookList });
         })
         .catch(error => {
           console.log("유저 대여 목록 조회 API 사용중 에러 발생");
