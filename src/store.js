@@ -2,16 +2,20 @@ import {createStore} from 'redux';
 
 export default createStore((state, action) => {
   if (state === undefined) {
-    return { memberId: JSON.parse(localStorage.getItem('memberId')) }
+    return {
+      memberId: JSON.parse(localStorage.getItem('memberId')),
+      memberType: JSON.parse(localStorage.getItem('memberType'))
+    }
   }
 
   if (action.type === 'AUTHENTICATION') {
-    if (action.memberId) {
+    if (action.memberId && action.memberType) {
       localStorage.setItem('memberId', JSON.stringify(action.memberId));
+      localStorage.setItem('memberType', JSON.stringify(action.memberType));
     } else {
-      localStorage.removeItem('memberId');
+      localStorage.clear()
     }
-    return {...state, memberId: action.memberId}
+    return {...state, memberId: action.memberId, memberType: action.memberType}
   }
 
   return state;

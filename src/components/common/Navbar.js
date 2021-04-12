@@ -4,6 +4,7 @@ import {Link, withRouter} from "react-router-dom";
 import "./navbar.scss";
 import coin from "../../assets/img/coin.svg";
 import api from "../../api";
+import store from "../../store";
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -11,25 +12,29 @@ class NavBar extends React.Component {
 
     const logout = async () => {
       await api.post("/logout")
+      localStorage.clear();
       window.location.href = "/"
     }
 
-    this.state = {
-      navItems: [
-        {
-          item: "책 등록",
-          link: "/books/new",
-        },
-        {
-          item: "마이 페이지",
-          link: "/myPage",
-        },
-        {
-          item: "로그아웃",
-          onClick: logout
-        }
-      ],
-    };
+    const isAdmin = !!store.getState().memberType && store.getState().memberType === 'ADMIN';
+
+    const adminNavItems = [{
+      item: "책 등록",
+      link: "/books/new",
+    }]
+
+    const normalNavItems = [
+      {
+        item: "마이 페이지",
+        link: "/myPage",
+      },
+      {
+        item: "로그아웃",
+        onClick: logout
+      }
+    ]
+
+    this.state = {navItems: isAdmin ? adminNavItems.concat(normalNavItems) : normalNavItems};
   }
 
   render() {
