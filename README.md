@@ -1,5 +1,20 @@
-## 업무 도우미 Tool
+# work-assistant-web
 
-### 미리 도서관
+This is WEB for miridih work assistant project.
 
-도서 관리 시스템 📚
+## Work Assistant Project
+
+### Book Management System 📚
+
+This is service that allows you to easily register and borrow books.
+
+## Development
+
+```zsh
+> npm install
+> npm start
+```
+
+## License
+
+MIT License Copyright (c) 2021 MIRIDIH Sqaud-B
