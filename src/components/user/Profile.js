@@ -22,12 +22,13 @@ class Profile extends React.Component {
   }
 
   isValidPassword = password => {
-    return password !== undefined && password.length > 0
+    const passwordRegExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
+    return passwordRegExp.test(password);
   }
 
   changePassword = async () => {
     if (!this.isValidPassword(this.state.password) || !this.isValidPassword(this.state.passwordCheck)) {
-      this.setState({invalid: true, message: '비밀번호를 입력해주세요.'})
+      this.setState({invalid: true, message: '비밀번호는 8 ~ 10자 영문, 숫자 조합이어야 합니다.'})
       return;
     }
     if (this.state.password !== this.state.passwordCheck) {
@@ -38,7 +39,7 @@ class Profile extends React.Component {
     const memberId = store.getState().memberId;
     try {
       const response = await api.put(`/members/${memberId}`, {password: this.state.password});
-      if(response.data === 'SUCCESS') {
+      if (response.data === 'SUCCESS') {
         alert('비밀번호가 변경되었습니다 😇');
       }
     } catch (e) {
