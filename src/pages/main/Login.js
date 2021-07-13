@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import miriAvatar from "../../assets/img/miri_avatar.png";
 import {ThemeProvider} from '@material-ui/styles';
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+// import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import {Box} from "@material-ui/core";
 import api from "../../api";
 import store from "../../store";
@@ -38,13 +38,13 @@ class Login extends React.Component {
   }
 
   useMuiTheme() {
-    return createMuiTheme({
-      palette: {
-        primary: {
-          main: '#22CC88'
-        }
-      }
-    });
+    // return createMuiTheme({
+    //   palette: {
+    //     primary: {
+    //       main: '#22CC88'
+    //     }
+    //   }
+    // });
   };
 
   useStyles() {
