@@ -10,4 +10,6 @@ const api = axios.create({
   withCredentials: true
 });
 
+document.cookie = "SameSite=None; Secure"
+
 export default api;
