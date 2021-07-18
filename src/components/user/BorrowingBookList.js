@@ -3,17 +3,35 @@ import {Box} from "@material-ui/core";
 import {DataGrid} from "@material-ui/data-grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import api from "../../api";
+import store from "../../store";
 
 class BorrowingBookList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rows: this.props.bookList
+      rows: this.props.bookList,
+      selectedRentals: []
     }
   }
 
-  returnBooks() {
-    alert('반납요');
+  selectRentals = (rentalList) => {
+    this.setState({selectedRentals: rentalList.selectionModel});
+  }
+
+  returnBooks = async () => {
+    const returnList = this.state.selectedRentals;
+    if (returnList.length < 1) {
+      alert('반납할 도서를 선택해주세요 📖');
+      return;
+    }
+    const response = await api.post(`/return/rentals`, { rentalIdList: returnList});
+    if (response.data.result !== 'SUCCESS') {
+      alert('책을 반납할 수 없습니다.');
+      return;
+    }
+    alert("반납 완료!");
+    window.location.reload();
   }
 
   render() {
@@ -32,7 +50,13 @@ class BorrowingBookList extends React.Component {
           대여 목록
         </Typography>
         <Box style={{height: 350, width: '100%'}} mt={2}>
-          <DataGrid rows={bookList} columns={columns} pageSize={5} checkboxSelection/>
+          <DataGrid
+            rows={bookList}
+            columns={columns}
+            pageSize={5}
+            checkboxSelection
+            onSelectionModelChange={this.selectRentals.bind(this)}
+          />
           <Button
             type="submit"
             fullWidth
