@@ -25,18 +25,13 @@ class BorrowingBookList extends React.Component {
       alert('반납할 도서를 선택해주세요 📖');
       return;
     }
-    // TODO: 윤병, 한번에 여러 도서를 반납 가능하도록 수정 필요
-    for (const rentalId of returnList) {
-      await this.returnBook(rentalId);
+    const response = await api.post(`/return/rentals`, { rentalIdList: returnList});
+    if (response.data.result !== 'SUCCESS') {
+      alert('책을 반납할 수 없습니다.');
+      return;
     }
-    const response = await api.get(`/members/${store.getState().memberId}/rentals`)
-    const borrowingBookList = response.data;
-    this.setState({ borrowingBookList: borrowingBookList });
-  }
-
-  returnBook = async (rentalId) => {
-    const response = await api.put(`/rentals/${rentalId}`, {status: 'RETURN'});
-    if (response.result !== 'SUCCESS') console.log(`책 반납 중 error 발생. rentalId: ${rentalId}`);
+    alert("반납 완료!");
+    window.location.reload();
   }
 
   render() {
