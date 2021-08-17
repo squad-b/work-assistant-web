@@ -1,12 +1,15 @@
-import * as React from "react";
 import './book-rental-information.scss';
+
+import * as React from "react";
+
 import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+
 import BookRentalTableRow from "./BookRentalTableRow";
 import api from "../../../api";
 
-class BookRentalTable extends React.Component {
+class BookRentalTable extends React.Component<any,any> {
 
-  constructor(props) {
+  constructor(props:any) {
     super(props);
 
     this.state = {
@@ -21,8 +24,7 @@ class BookRentalTable extends React.Component {
   fetchBookRentalList = () => {
     api.get(`/rentals/books/` + this.props.bookId)
         .then(response => {
-          this.state.bookRentalList = response.data;
-          this.setState({ bookRentalList: this.state.bookRentalList });
+          this.setState({bookRentalList:response.data});
         })
         .catch(error => {
           console.log("책 대여 정보 조회 API 사용중 에러 발생");
@@ -43,7 +45,7 @@ class BookRentalTable extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.state.bookRentalList.map((bookRental, idx) => {return <BookRentalTableRow key = {idx} bookRental = {bookRental}/>})}
+            {this.state.bookRentalList.map((bookRental:any, idx:number) => {return <BookRentalTableRow key = {idx} bookRental = {bookRental}/>})}
           </TableBody>
         </Table>
       </div>

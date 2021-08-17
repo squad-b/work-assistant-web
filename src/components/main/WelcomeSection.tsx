@@ -1,6 +1,7 @@
+import "./welcome-section.scss";
+
 import React from "react";
 import welcome from "../../assets/img/welcome.png";
-import "./welcome-section.scss"
 
 class WelcomeSection extends React.Component {
   render() {

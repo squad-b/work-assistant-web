@@ -1,9 +1,11 @@
-import React from "react";
 import "./footer.scss";
+
+import React from "react";
 import githubIcon from "../../assets/img/github.png";
 
-class Footer extends React.Component {
-  constructor(props) {
+class Footer extends React.Component<any> {
+  private icons:any[];
+  constructor(props:any) {
     super(props);
     this.icons = [
         {

@@ -1,7 +1,8 @@
-import * as React from "react";
 import './tags.scss';
 
-class Tag extends React.Component {
+import * as React from "react";
+
+class Tag extends React.Component<any> {
   render() {
     const {tag} = this.props;
     return (
@@ -10,12 +11,12 @@ class Tag extends React.Component {
   }
 }
 
-class Tags extends React.Component {
+class Tags extends React.Component<any> {
   render() {
     const {tags} = this.props;
     return (
       <ul className='tag-container'>
-        {tags.map((tag, idx) => <Tag key={idx} tag={tag}/>)}
+        {tags.map((tag:any, idx:number) => <Tag key={idx} tag={tag}/>)}
       </ul>
     )
   }

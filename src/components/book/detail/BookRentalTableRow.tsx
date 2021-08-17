@@ -1,7 +1,8 @@
 import * as React from "react";
+
 import {TableCell, TableRow} from "@material-ui/core";
 
-class BookRentalTableRow extends React.Component {
+class BookRentalTableRow extends React.Component<any> {
   render() {
     const {bookRental} = this.props;
     return (

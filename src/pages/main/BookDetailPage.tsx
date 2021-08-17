@@ -1,8 +1,9 @@
 import * as React from "react";
+
 import BookDetail from "../../components/book/detail/BookDetail";
 import Layout from "../../components/common/Layout";
 
-class BookDetailPage extends React.Component {
+class BookDetailPage extends React.Component<any> {
   componentDidMount() {
     window.scrollTo(0,0);
   }

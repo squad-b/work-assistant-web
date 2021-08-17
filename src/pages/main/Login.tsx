@@ -1,30 +1,29 @@
-import React from "react";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import React, { FC, useState } from "react";
+
 import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import miriAvatar from "../../assets/img/miri_avatar.png";
-import {ThemeProvider} from '@material-ui/styles';
 // import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import {Box} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import {ThemeProvider} from '@material-ui/styles';
+import Typography from "@material-ui/core/Typography";
 import api from "../../api";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import miriAvatar from "../../assets/img/miri_avatar.png";
 import store from "../../store";
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: ''
-    }
-  }
+const Login:FC<any>=(props:any)=>{
 
-  login = async () => {
+  const [state, setstate] = useState<any>({
+    email: '',
+    password: ''
+  })
+ 
+  const login = async () => {
     // TODO: 윤병, email, password 유효성 검사
-    const response = await api.post('/login', {email: this.state.email, password: this.state.password});
+    const response = await api.post('/login', {email:state.email, password: state.password});
     if (response.data.result !== 'SUCCESS') {
       alert('땡');
       return;
@@ -34,10 +33,10 @@ class Login extends React.Component {
       memberId: response.data.loginMember.id,
       memberType: response.data.loginMember.type
     });
-    this.props.history.push('/');
+    props.history.push('/');
   }
 
-  useMuiTheme() {
+  const useMuiTheme=()=>{
     // return createMuiTheme({
     //   palette: {
     //     primary: {
@@ -47,7 +46,7 @@ class Login extends React.Component {
     // });
   };
 
-  useStyles() {
+  const useStyles=()=>{
     return makeStyles((theme) => ({
       paper: {
         marginTop: theme.spacing(10),
@@ -70,20 +69,20 @@ class Login extends React.Component {
     }));
   }
 
-  render() {
+ 
 
-    const classes = this.useStyles();
-    const buttonTheme = this.useMuiTheme();
+    const classes = useStyles();
+    const buttonTheme = useMuiTheme();
 
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline/>
-        <Box className={classes.paper} mt={10}>
-          <Avatar className={classes.avatar} src={miriAvatar}/>
+        <Box className={classes().paper} mt={10}>
+          <Avatar className={classes().avatar} src={miriAvatar}/>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes().form} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -94,9 +93,9 @@ class Login extends React.Component {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={function (e) {
-                this.setState({email: e.target.value})
-              }.bind(this)}
+              onChange={(e:any)=>{
+                setstate({email: e.target.value})
+              }}
             />
             <TextField
               variant="outlined"
@@ -108,27 +107,26 @@ class Login extends React.Component {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={function (e) {
-                this.setState({password: e.target.value})
-              }.bind(this)}
+              onChange={(e:any)=>{
+                setstate({password: e.target.value})
+              }}
             />
-            <ThemeProvider theme={buttonTheme}>
+            
               <Button
                 type="button"
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={classes.submit}
-                onClick={this.login.bind(this)}
+                className={classes().submit}
+                onClick={login}
               >
                 Sign In
               </Button>
-            </ThemeProvider>
+           
           </form>
         </Box>
       </Container>
     );
-  }
 }
 
 export default Login;
