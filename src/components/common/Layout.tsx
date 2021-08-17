@@ -1,8 +1,10 @@
-import React from "react";
-import NavBar from "./Navbar";
 import "./base.scss";
-import Footer from "./Footer";
+
+import React, { FC } from "react";
+
 import {Container} from "@material-ui/core";
+import Footer from "./Footer";
+import NavBar from "./Navbar";
 import {makeStyles} from "@material-ui/core/styles"
 
 const useStyles = makeStyles((theme) => ({
@@ -10,19 +12,16 @@ const useStyles = makeStyles((theme) => ({
     background: theme.palette.success.main,
   },
 }));
-
-class Layout extends React.Component {
-  render() {
+const  Layout:FC<any> =(props:any)=>{
     return (
       <div>
         <NavBar/>
-          <Container className={useStyles.container}>
-          {this.props.children}
+          <Container className={useStyles().container}>
+          {props.children}
           </Container>
         <Footer/>
       </div>
     );
-  }
 }
 
 export default Layout;

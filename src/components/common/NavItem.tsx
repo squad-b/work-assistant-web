@@ -1,8 +1,9 @@
-import React from "react";
-import {Link} from "react-router-dom";
 import "./navitem.scss"
 
-class NavItem extends React.Component {
+import {Link} from "react-router-dom";
+import React from "react";
+
+class NavItem extends React.Component<any> {
   render() {
     return (
       <li className="main-nav-item" onClick={this.props.navItem.onClick} >

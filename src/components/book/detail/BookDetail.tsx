@@ -1,11 +1,13 @@
-import * as React from "react";
-import BookDescription from "./BookDescription";
 import './book-detail.scss'
+
+import * as React from "react";
+
+import BookDescription from "./BookDescription";
 import BookRentalTable from "./BookRentalTable";
 import api from '../../../api'
 
-class BookDetail extends React.Component {
-  constructor(props) {
+class BookDetail extends React.Component<any,any> {
+  constructor(props:any) {
     super(props);
 
     this.state = {
@@ -21,10 +23,10 @@ class BookDetail extends React.Component {
   fetchBookDetail = () => {
     api.get(`/books/` + this.props.bookId)
     .then(response => {
-      this.state.book = response.data;
+      this.setState({book: response.data})
       
       if (this.state.book.imageUrl === null || this.state.book.imageUrl === undefined || this.state.book.imageUrl === "") {
-        this.state.book.imageUrl = this.state.noThumbnailImageUrl;
+        this.setState({book: {...this.state.book,noThumbnailImageUrl:this.state.noThumbnailImageUrl}})
       }
 
       this.setState({ book: this.state.book });

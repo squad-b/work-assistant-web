@@ -1,5 +1,7 @@
-import * as React from "react";
 import './book-add-popup.scss';
+
+import * as React from "react";
+
 import {
   Dialog,
   DialogActions,
@@ -12,12 +14,13 @@ import {
   Select,
   TextField
 } from "@material-ui/core";
+
 import Button from "@material-ui/core/Button";
 import api from "../../../api";
 
-class BookAddPopup extends React.Component {
+class BookAddPopup extends React.Component<any,any> {
 
-  constructor(props) {
+  constructor(props:any) {
     super(props);
     this.state = {
       bookCategory: 'DEVELOP',
@@ -27,12 +30,12 @@ class BookAddPopup extends React.Component {
   }
 
   render() {
-    const onChangeCategory = (e) => {
+    const onChangeCategory = (e:any) => {
       const bookCategory = e.target.value
       this.setState({bookCategory : bookCategory})
     }
 
-    const onChangeStockQuantity = (e) => {
+    const onChangeStockQuantity = (e:any) => {
       const stockQuantity = e.target.value
       if (stockQuantity < 1) {
         alert("1 보다 큰 값을 넣어주세요")
@@ -43,7 +46,7 @@ class BookAddPopup extends React.Component {
       })
     }
 
-    const onClickRegisterButton = async (book) => {
+    const onClickRegisterButton = async (book:any) => {
       try {
         const res = await api.post("/books", {
           isbn: book.isbn.split(' ')[1],

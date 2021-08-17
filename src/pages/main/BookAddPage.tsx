@@ -1,12 +1,18 @@
 import * as React from "react";
+
+import BookAddPopup from "../../components/book/add/BookAddPopup";
 import BookSearchInput from "../../components/book/add/BookSearchInput";
 import BookSearchResultList from "../../components/book/add/BookSearchResultList";
 import Layout from "../../components/common/Layout";
-import BookAddPopup from "../../components/book/add/BookAddPopup";
 import api from "../../api";
 
-class BookAddPage extends React.Component {
-  constructor(props) {
+class BookAddPage extends React.Component<any,any> {
+  fetching: boolean;
+  isEnd: boolean;
+  query: string;
+  page: number;
+  size: number;
+  constructor(props:any) {
     super(props);
     this.state = {
       searchBooks: [],
@@ -40,7 +46,7 @@ class BookAddPage extends React.Component {
     )
   }
 
-  onClickBookCard = (book) => {
+  onClickBookCard = (book: any) => {
     this.setState({
       popupOpen: true,
       selectedBook: book
@@ -53,7 +59,7 @@ class BookAddPage extends React.Component {
     })
   }
 
-  onSearchButtonClick = async (query) => {
+  onSearchButtonClick = async (query:any) => {
 
     if (!query) {return;}
     this.fetching = true

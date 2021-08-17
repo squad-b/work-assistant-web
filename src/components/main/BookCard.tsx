@@ -1,19 +1,20 @@
-import React from "react";
 import "./book-card.scss"
+
 import {Link} from "react-router-dom";
+import React from "react";
 
-class BookCard extends React.Component {
+class BookCard extends React.Component<any> {
 
-  getBorrowableStatusClassName = (book) => {
+  getBorrowableStatusClassName = (book:any) => {
     return book.stockQuantity > 0 ? "borrow borrow-enable" : "borrow borrow-unable";
   }
 
-  getBorrowableStatus = (book) => {
+  getBorrowableStatus = (book:any) => {
     return book.stockQuantity > 0 ? "대여가능" : "대여불가";
     // return this.book.stockQuantity > 0 ? `대여 가능(${this.book.stockQuantity}권)` : "대여 불가";
   }
 
-  renderCardLinkedDetail = (book) => {
+  renderCardLinkedDetail = (book:any) => {
     return (
       <Link to={'/books/' + book.id}>
         <img className="book-thumbnail" src={book.imageUrl} alt="책 썸네일"/>
@@ -23,7 +24,7 @@ class BookCard extends React.Component {
     )
   }
 
-  renderCardForRegister = (book, onClick) => {
+  renderCardForRegister = (book:any, onClick:(book:any)=>void) => {
     return (
       <div onClick={() => {onClick(book)}}>
         <img className="book-thumbnail" src={book.thumbnail} alt="책 썸네일"/>

@@ -1,17 +1,19 @@
-import * as React from "react"
 import "./book-detail-description.scss";
+
+import * as React from "react"
+
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import api from "../../../api"
 
-class BookDescription extends React.Component {
-  constructor(props) {
+class BookDescription extends React.Component<any,any> {
+  constructor(props:any) {
     super(props);
     this.state = {
       isOpened: false,

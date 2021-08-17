@@ -1,14 +1,14 @@
-import React from "react";
-import Profile from "../../components/user/Profile";
 import BorrowingBookList from "../../components/user/BorrowingBookList";
-import Layout from "../../components/common/Layout";
-import Typography from "@material-ui/core/Typography";
 import {Box} from "@material-ui/core";
+import Layout from "../../components/common/Layout";
+import Profile from "../../components/user/Profile";
+import React from "react";
+import Typography from "@material-ui/core/Typography";
 import api from "../../api";
 import store from "../../store";
 
-export default class MyPage extends React.Component {
-  constructor(props) {
+export default class MyPage extends React.Component<any,any> {
+  constructor(props:any) {
     super(props);
     this.state = {
       user: {
@@ -27,9 +27,7 @@ export default class MyPage extends React.Component {
   fetchProfile = async () => {
      await api.get(`/members/${store.getState().memberId}/profile`)
         .then(response => {
-          this.state.user.email = response.data.email;
-          this.state.user.name = response.data.name;
-          this.setState({ user: this.state.user });
+          this.setState({ user: {...this.state.user,email:response.data.email,name:response.data.name} });
         })
         .catch(error => {
           console.log("유저 프로필 조회 API 사용중 에러 발생");
@@ -41,7 +39,7 @@ export default class MyPage extends React.Component {
     await api.get(`/members/${store.getState().memberId}/rentals?status=ON_RENTAL`)
         .then(response => {
           const borrowingBookList = response.data;
-            borrowingBookList.forEach(book => book.isLongTerm = book.isLongTerm ? '🅾️' : '❎');
+            borrowingBookList.forEach((book:any) => book.isLongTerm = book.isLongTerm ? '🅾️' : '❎');
             this.setState({ borrowingBookList: borrowingBookList });
         })
         .catch(error => {

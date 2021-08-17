@@ -1,11 +1,12 @@
-import React from "react";
-import BookCard from "./BookCard";
 import "./book-list-section.scss";
+
+import BookCard from "./BookCard";
+import React from "react";
 import SearchBar from 'material-ui-search-bar';
 import api from '../../api';
 
-class BookListSection extends React.Component {
-  constructor(props) {
+class BookListSection extends React.Component<any,any> {
+  constructor(props:any) {
     super(props);
 
     this.state = {
@@ -34,7 +35,7 @@ class BookListSection extends React.Component {
   fetchBookList = () => {
     api.get(`/books`)
     .then(response => {
-      this.state.bookList = response.data;
+      this.setState({bookList:response.data})
       this.setState({ bookListByCategory: this.getBookListByCategory(this.state.bookList) });
     })
     .catch(error => {
@@ -43,15 +44,15 @@ class BookListSection extends React.Component {
     })
   }
 
-  getBookListByCategory = (bookList) => {
-    const bookListByCategory = {};
+  getBookListByCategory = (bookList: any[]) => {
+    const bookListByCategory:any = {};
     bookList.forEach((book) => {
       const categories = book.category.split(",");
 
       if (book.imageUrl === null || book.imageUrl === undefined || book.imageUrl === "") {
         book.imageUrl = this.state.noThumbnailImageUrl;
       }
-      categories.forEach((category) => {
+      categories.forEach((category: string | number) => {
         if (bookListByCategory[category] === undefined) {
           bookListByCategory[category] = [book];
         } else {
@@ -62,7 +63,7 @@ class BookListSection extends React.Component {
     return bookListByCategory;
   }
 
-  searchBook = (e) => {
+  private searchBook(e:any){
     const bookList = JSON.parse(JSON.stringify(this.state.bookList));
 
     for (let i = bookList.length - 1; i >= 0; i--) {
@@ -80,8 +81,7 @@ class BookListSection extends React.Component {
         <div className="book-search-bar">
           <SearchBar
             placeholder="책 제목을 입력해주세요 : )"
-            autoFocus
-            onRequestSearch={this.searchBook}
+            onRequestSearch={this.searchBook as any} 
           />
         </div>
         {Object.keys(this.state.bookCategory).map((key, i) => {
@@ -92,7 +92,7 @@ class BookListSection extends React.Component {
               </div>
               <div className="book-list-section">
                 {this.state.bookListByCategory[key] === undefined ? "" : 
-                  this.state.bookListByCategory[key].map((book, j) => {
+                  this.state.bookListByCategory[key].map((book: any, j:number) => {
                     return <BookCard book={book} key={j}/>
                   })}
               </div>
