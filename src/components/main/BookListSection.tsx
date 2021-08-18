@@ -28,11 +28,11 @@ class BookListSection extends React.Component<any,any> {
     }
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.fetchBookList();
   }
 
-  fetchBookList = () => {
+  private fetchBookList() {
     api.get(`/books`)
     .then(response => {
       this.setState({bookList:response.data})
@@ -44,7 +44,7 @@ class BookListSection extends React.Component<any,any> {
     })
   }
 
-  getBookListByCategory = (bookList: any[]) => {
+  private getBookListByCategory(bookList: any[]) {
     const bookListByCategory:any = {};
     bookList.forEach((book) => {
       const categories = book.category.split(",");

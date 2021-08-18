@@ -4,11 +4,11 @@ import BookDetail from "../../components/book/detail/BookDetail";
 import Layout from "../../components/common/Layout";
 
 class BookDetailPage extends React.Component<any> {
-  componentDidMount() {
+  public componentDidMount() {
     window.scrollTo(0,0);
   }
   
-  render() {
+  public render() {
     return (
       <div>
         <Layout>

@@ -7,7 +7,7 @@ import BookCard from "../../main/BookCard";
 
 class BookSearchResultList extends React.Component<any> {
 
-  render() {
+  public render() {
     const {searchBooks, onClickCard} = this.props;
     return (
       <div className="book-list-section">

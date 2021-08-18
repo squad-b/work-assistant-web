@@ -1,13 +1,13 @@
+// import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import {Box, createTheme} from "@material-ui/core";
 import React, { FC, useState } from "react";
+import {ThemeProvider, createStyles} from '@material-ui/styles';
 
 import Avatar from "@material-ui/core/Avatar";
-// import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-import {Box} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import {ThemeProvider} from '@material-ui/styles';
 import Typography from "@material-ui/core/Typography";
 import api from "../../api";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -36,15 +36,8 @@ const Login:FC<any>=(props:any)=>{
     props.history.push('/');
   }
 
-  const useMuiTheme=()=>{
-    // return createMuiTheme({
-    //   palette: {
-    //     primary: {
-    //       main: '#22CC88'
-    //     }
-    //   }
-    // });
-  };
+
+
 
   const useStyles=()=>{
     return makeStyles((theme) => ({
@@ -64,25 +57,26 @@ const Login:FC<any>=(props:any)=>{
       },
       submit: {
         margin: theme.spacing(3, 0, 2),
-        color: theme.palette.primary.main
+        color: 'white'
       },
     }));
   }
+  
 
  
 
     const classes = useStyles();
-    const buttonTheme = useMuiTheme();
+
 
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline/>
-        <Box className={classes().paper} mt={10}>
-          <Avatar className={classes().avatar} src={miriAvatar}/>
+        <Box className={classes(props.theme).paper} mt={10}>
+          <Avatar className={classes(props.theme).avatar} src={miriAvatar}/>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes().form} noValidate>
+          <form className={classes(props.theme).form} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -94,7 +88,10 @@ const Login:FC<any>=(props:any)=>{
               autoComplete="email"
               autoFocus
               onChange={(e:any)=>{
-                setstate({email: e.target.value})
+                setstate({
+                  ...state,
+                  email: e.target.value
+                })
               }}
             />
             <TextField
@@ -108,21 +105,22 @@ const Login:FC<any>=(props:any)=>{
               id="password"
               autoComplete="current-password"
               onChange={(e:any)=>{
-                setstate({password: e.target.value})
+                setstate({
+                  ...state,
+                  password: e.target.value
+                })
               }}
             />
-            
               <Button
                 type="button"
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={classes().submit}
+                className={classes(props.theme).submit}
                 onClick={login}
               >
                 Sign In
               </Button>
-           
           </form>
         </Box>
       </Container>

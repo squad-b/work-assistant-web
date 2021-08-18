@@ -16,7 +16,7 @@ const  Layout:FC<any> =(props:any)=>{
     return (
       <div>
         <NavBar/>
-          <Container className={useStyles().container}>
+          <Container className={useStyles(props.theme).container}>
           {props.children}
           </Container>
         <Footer/>

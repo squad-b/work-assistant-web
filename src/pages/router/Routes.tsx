@@ -11,7 +11,12 @@ import store from "../../store";
 
 class Routes extends React.Component<any> {
 
-  componentDidMount() {
+
+  constructor(props:any){
+    super(props);
+  }
+
+  public componentDidMount() {
     // TODO: 윤병, 페이지 렌더링 되기 전에 세션 체크하고 싶은데 비동기가 넘나 어려움...
     const isLogin = store.getState().memberId;
     if (!isLogin) return;
@@ -32,7 +37,7 @@ class Routes extends React.Component<any> {
     });
   }
 
-  renderPage(component: React.ReactNode, isLoginPage?: boolean) {
+  public renderPage(component: React.ReactNode, isLoginPage?: boolean) {
     const isLogin = store.getState().memberId;
     if (isLoginPage) {
       return isLogin ? <Redirect to='/'/> : component;
@@ -40,7 +45,7 @@ class Routes extends React.Component<any> {
     return isLogin ? component : <Redirect to='/login'/>;
   }
 
-  render() {
+  public render() {
     return (
       <div>
         <BrowserRouter>

@@ -42,7 +42,7 @@ class NavBar extends React.Component<any,any> {
     this.state = {navItems: isAdmin ? adminNavItems.concat(normalNavItems) : normalNavItems};
   }
 
-  render() {
+  public render() {
     return (
       <div className="main-nav">
         <div className="main-nav-logo">

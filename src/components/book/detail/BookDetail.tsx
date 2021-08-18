@@ -16,11 +16,11 @@ class BookDetail extends React.Component<any,any> {
     }
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.fetchBookDetail()
   }
 
-  fetchBookDetail = () => {
+  private fetchBookDetail(){
     api.get(`/books/` + this.props.bookId)
     .then(response => {
       this.setState({book: response.data})
