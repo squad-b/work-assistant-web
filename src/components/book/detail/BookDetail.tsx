@@ -23,13 +23,15 @@ class BookDetail extends React.Component<any,any> {
   private fetchBookDetail(){
     api.get(`/books/` + this.props.bookId)
     .then(response => {
-      this.setState({book: response.data})
+
+      const newBook=response.data;
+      
       
       if (this.state.book.imageUrl === null || this.state.book.imageUrl === undefined || this.state.book.imageUrl === "") {
-        this.setState({book: {...this.state.book,noThumbnailImageUrl:this.state.noThumbnailImageUrl}})
+        newBook.noThumbnailImageUrl=this.state.noThumbnailImageUrl
       }
 
-      this.setState({ book: this.state.book });
+      this.setState({ book: newBook });
     })
     .catch(error => {
       console.log("책 상세 조회 API 사용중 에러 발생");
