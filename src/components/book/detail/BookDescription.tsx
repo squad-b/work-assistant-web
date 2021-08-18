@@ -19,13 +19,15 @@ class BookDescription extends React.Component<any,any> {
       isOpened: false,
       isLongTerm: false
     }
+    this.openPopup=this.openPopup.bind(this);
+    this.closePopup=this.closePopup.bind(this);
   }
 
-  openPopup = () => {
+  private openPopup() {
     this.setState({ isOpend : true })
   };
 
-  closePopup = () => {
+  private closePopup ()  {
     this.setState({ isOpend : false })
   };
 

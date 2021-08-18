@@ -26,15 +26,15 @@ class BookAddPage extends React.Component<any,any> {
     this.size = 10;
   }
 
-  componentDidMount = () => {
+  public componentDidMount(){
     window.addEventListener('scroll', this.handleScroll);
   }
 
-  componentWillUnmount = () => {
+  public componentWillUnmount(){
     window.removeEventListener('scroll', this.handleScroll);
   }
 
-  render() {
+  public render() {
     return (
       <div>
         <Layout>
@@ -46,20 +46,20 @@ class BookAddPage extends React.Component<any,any> {
     )
   }
 
-  onClickBookCard = (book: any) => {
+  private onClickBookCard = (book: any) => {
     this.setState({
       popupOpen: true,
       selectedBook: book
     })
   }
 
-  onClosePopup = () => {
+  private onClosePopup = () => {
     this.setState({
       popupOpen: false
     })
   }
 
-  onSearchButtonClick = async (query:any) => {
+  private onSearchButtonClick = async (query:any) => {
 
     if (!query) {return;}
     this.fetching = true
@@ -86,7 +86,7 @@ class BookAddPage extends React.Component<any,any> {
     this.query = query;
   }
 
-  handleScroll = () => {
+  private handleScroll = () => {
     const scrollHeight = document.documentElement.scrollHeight;
     const scrollTop = document.documentElement.scrollTop;
     const clientHeight = document.documentElement.clientHeight;

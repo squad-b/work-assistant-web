@@ -3,7 +3,7 @@ import './tags.scss';
 import * as React from "react";
 
 class Tag extends React.Component<any> {
-  render() {
+  public render() {
     const {tag} = this.props;
     return (
       <li>#{tag}</li>
@@ -12,7 +12,7 @@ class Tag extends React.Component<any> {
 }
 
 class Tags extends React.Component<any> {
-  render() {
+  public render() {
     const {tags} = this.props;
     return (
       <ul className='tag-container'>

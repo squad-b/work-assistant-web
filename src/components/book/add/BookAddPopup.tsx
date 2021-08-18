@@ -29,7 +29,7 @@ class BookAddPopup extends React.Component<any,any> {
     }
   }
 
-  render() {
+  public render() {
     const onChangeCategory = (e:any) => {
       const bookCategory = e.target.value
       this.setState({bookCategory : bookCategory})

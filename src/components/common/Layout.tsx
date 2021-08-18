@@ -9,14 +9,16 @@ import {makeStyles} from "@material-ui/core/styles"
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    background: theme.palette.success.main,
+    background: "white",
   },
 }));
-const  Layout:FC<any> =(props:any)=>{
+const Layout:FC<any> =(props:any)=>{
+
+
     return (
       <div>
         <NavBar/>
-          <Container className={useStyles().container}>
+          <Container className={useStyles(props.theme).container}>
           {props.children}
           </Container>
         <Footer/>

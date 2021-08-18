@@ -16,7 +16,7 @@ class Footer extends React.Component<any> {
       ]
     }
 
-  render() {
+  public render() {
     return (
       <div className="footer">
         <div className="footer-icons">

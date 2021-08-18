@@ -3,7 +3,7 @@ import * as React from "react";
 import {TableCell, TableRow} from "@material-ui/core";
 
 class BookRentalTableRow extends React.Component<any> {
-  render() {
+  public render() {
     const {bookRental} = this.props;
     return (
       <TableRow>

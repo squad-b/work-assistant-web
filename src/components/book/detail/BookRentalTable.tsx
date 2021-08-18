@@ -17,11 +17,11 @@ class BookRentalTable extends React.Component<any,any> {
     }
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.fetchBookRentalList();
   }
 
-  fetchBookRentalList = () => {
+  public fetchBookRentalList(){
     api.get(`/rentals/books/` + this.props.bookId)
         .then(response => {
           this.setState({bookRentalList:response.data});
@@ -32,7 +32,7 @@ class BookRentalTable extends React.Component<any,any> {
         })
   }
 
-  render() {
+  public render() {
     const columns = ['이름', '장기 대여', '대여 시작', '대여 끝']
 
     return (

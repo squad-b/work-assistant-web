@@ -9,7 +9,10 @@ class BookListSection extends React.Component<any,any> {
   constructor(props:any) {
     super(props);
 
+   
+
     this.state = {
+      searchKeyword:"",
       bookList: [],
       bookListByCategory: [],
       bookCategory: {
@@ -26,13 +29,16 @@ class BookListSection extends React.Component<any,any> {
       isSearched: false,
       noThumbnailImageUrl: "https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png" // TODO: 전역으로 관리하기(redux?) 
     }
+
+    this.searchBook=this.searchBook.bind(this);
+    this.onChangeKeyword=this.onChangeKeyword.bind(this);
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.fetchBookList();
   }
 
-  fetchBookList = () => {
+  private fetchBookList() {
     api.get(`/books`)
     .then(response => {
       this.setState({bookList:response.data})
@@ -44,7 +50,7 @@ class BookListSection extends React.Component<any,any> {
     })
   }
 
-  getBookListByCategory = (bookList: any[]) => {
+  private getBookListByCategory(bookList: any[]) {
     const bookListByCategory:any = {};
     bookList.forEach((book) => {
       const categories = book.category.split(",");
@@ -63,11 +69,11 @@ class BookListSection extends React.Component<any,any> {
     return bookListByCategory;
   }
 
-  private searchBook(e:any){
+  private searchBook(){
     const bookList = JSON.parse(JSON.stringify(this.state.bookList));
 
     for (let i = bookList.length - 1; i >= 0; i--) {
-      if (!bookList[i].title.toLowerCase().includes(e.toLowerCase())) {
+      if (!bookList[i].title.toLowerCase().includes(this.state.searchKeyword)) {
         bookList.splice(i, 1);
       }
     }
@@ -75,13 +81,20 @@ class BookListSection extends React.Component<any,any> {
     this.setState({ bookListByCategory: this.getBookListByCategory(bookList) });
   }
 
+  private onChangeKeyword(searchKeyword:string):void{
+    this.setState({searchKeyword})
+  }
+
+
+
   render() {
     return (
       <div>
         <div className="book-search-bar">
           <SearchBar
             placeholder="책 제목을 입력해주세요 : )"
-            onRequestSearch={this.searchBook as any} 
+            onChange={this.onChangeKeyword}
+            onRequestSearch={this.searchBook} 
           />
         </div>
         {Object.keys(this.state.bookCategory).map((key, i) => {

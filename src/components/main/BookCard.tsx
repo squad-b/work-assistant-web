@@ -5,16 +5,16 @@ import React from "react";
 
 class BookCard extends React.Component<any> {
 
-  getBorrowableStatusClassName = (book:any) => {
+  private getBorrowableStatusClassName(book:any){
     return book.stockQuantity > 0 ? "borrow borrow-enable" : "borrow borrow-unable";
   }
 
-  getBorrowableStatus = (book:any) => {
+  private getBorrowableStatus(book:any) {
     return book.stockQuantity > 0 ? "대여가능" : "대여불가";
     // return this.book.stockQuantity > 0 ? `대여 가능(${this.book.stockQuantity}권)` : "대여 불가";
   }
 
-  renderCardLinkedDetail = (book:any) => {
+  private renderCardLinkedDetail(book:any){
     return (
       <Link to={'/books/' + book.id}>
         <img className="book-thumbnail" src={book.imageUrl} alt="책 썸네일"/>
@@ -24,7 +24,7 @@ class BookCard extends React.Component<any> {
     )
   }
 
-  renderCardForRegister = (book:any, onClick:(book:any)=>void) => {
+  private renderCardForRegister = (book:any, onClick:(book:any)=>void) => {
     return (
       <div onClick={() => {onClick(book)}}>
         <img className="book-thumbnail" src={book.thumbnail} alt="책 썸네일"/>
@@ -35,7 +35,7 @@ class BookCard extends React.Component<any> {
     )
   }
 
-  render() {
+  public render() {
     const {book, register, onClick} = this.props
     if (!book.thumbnail) {book.thumbnail = 'https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png';}
     if (book.title && book.title.length > 10) {book.title = book.title.substring(0, 15) + '...'}
