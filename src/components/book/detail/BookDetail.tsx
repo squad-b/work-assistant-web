@@ -23,10 +23,8 @@ class BookDetail extends React.Component<any,any> {
   private fetchBookDetail(){
     api.get(`/books/` + this.props.bookId)
     .then(response => {
+      const newBook = response.data;
 
-      const newBook=response.data;
-      
-      
       if (this.state.book.imageUrl === null || this.state.book.imageUrl === undefined || this.state.book.imageUrl === "") {
         newBook.noThumbnailImageUrl=this.state.noThumbnailImageUrl
       }

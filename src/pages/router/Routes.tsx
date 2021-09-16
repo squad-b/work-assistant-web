@@ -10,8 +10,6 @@ import api from "../../api";
 import store from "../../store";
 
 class Routes extends React.Component<any> {
-
-
   public componentDidMount() {
     // TODO: 윤병, 페이지 렌더링 되기 전에 세션 체크하고 싶은데 비동기가 넘나 어려움...
     const isLogin = store.getState().memberId;
