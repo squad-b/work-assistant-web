@@ -8,9 +8,6 @@ import api from '../../api';
 class BookListSection extends React.Component<any,any> {
   constructor(props:any) {
     super(props);
-
-   
-
     this.state = {
       searchKeyword:"",
       bookList: [],
