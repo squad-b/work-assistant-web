@@ -81,7 +81,7 @@ class BookListSection extends React.Component<any, any> {
     bookList.forEach((book) => {
       const categories = book.category.split(",");
 
-      if (book.imageUrl === null || book.imageUrl === undefined || book.imageUrl === "") {
+      if (!book.imageUrl) {
         book.imageUrl = this.state.noThumbnailImageUrl;
       }
       categories.forEach((category: string | number) => {
