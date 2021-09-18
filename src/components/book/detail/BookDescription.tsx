@@ -53,7 +53,7 @@ class BookDescription extends React.Component<any, any> {
           <li>{book.stockQuantity > 0 ?
             <Button variant="outlined" className="rent-button" onClick={this.openPopup}>대여하기</Button> : ""}</li>
         </ul>
-        <Dialog open={this.state.isOpend == undefined ? false : this.state.isOpend} onClose={this.closePopup}>
+        <Dialog open={this.state.isOpened == undefined ? false : this.state.isOpened} onClose={this.closePopup}>
           <DialogTitle id="alert-dialog-title">{"정말로 대여하시겠습니까?"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
@@ -73,11 +73,11 @@ class BookDescription extends React.Component<any, any> {
   };
 
   private openPopup() {
-    this.setState({isOpend: true})
+    this.setState({isOpened: true})
   };
 
   private closePopup() {
-    this.setState({isOpend: false})
+    this.setState({isOpened: false})
   };
 }
 
