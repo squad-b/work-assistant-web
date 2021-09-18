@@ -6,13 +6,14 @@ import BookSearchResultList from "../../components/book/add/BookSearchResultList
 import Layout from "../../components/common/Layout";
 import api from "../../api";
 
-class BookAddPage extends React.Component<any,any> {
+class BookAddPage extends React.Component<any, any> {
   fetching: boolean;
   isEnd: boolean;
   query: string;
   page: number;
   size: number;
-  constructor(props:any) {
+
+  constructor(props: any) {
     super(props);
     this.state = {
       searchBooks: [],
@@ -26,11 +27,11 @@ class BookAddPage extends React.Component<any,any> {
     this.size = 10;
   }
 
-  public componentDidMount(){
+  public componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
   }
 
-  public componentWillUnmount(){
+  public componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
@@ -40,7 +41,7 @@ class BookAddPage extends React.Component<any,any> {
         <Layout>
           <BookSearchInput onSearchButtonClick={this.onSearchButtonClick}/>
           <BookSearchResultList searchBooks={this.state.searchBooks} onClickCard={this.onClickBookCard}/>
-          <BookAddPopup open={this.state.popupOpen}  book={this.state.selectedBook} onClose={this.onClosePopup}/>
+          <BookAddPopup open={this.state.popupOpen} book={this.state.selectedBook} onClose={this.onClosePopup}/>
         </Layout>
       </div>
     )
@@ -59,9 +60,11 @@ class BookAddPage extends React.Component<any,any> {
     })
   }
 
-  private onSearchButtonClick = async (query:any) => {
+  private onSearchButtonClick = async (query: any) => {
 
-    if (!query) {return;}
+    if (!query) {
+      return;
+    }
     this.fetching = true
 
     if (this.query !== query) {
@@ -91,7 +94,7 @@ class BookAddPage extends React.Component<any,any> {
     const scrollTop = document.documentElement.scrollTop;
     const clientHeight = document.documentElement.clientHeight;
 
-    if (scrollTop + clientHeight >= scrollHeight && this.fetching === false && this.isEnd === false) {
+    if (scrollTop + clientHeight >= scrollHeight && !this.fetching && !this.isEnd) {
       // 페이지 끝에 도달하면 추가 데이터를 받아온다
       this.onSearchButtonClick(this.query);
     }
