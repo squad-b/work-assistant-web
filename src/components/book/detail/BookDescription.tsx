@@ -11,16 +11,22 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import api from "../../../api"
+import store from "../../../store";
+import BookUpdatePopup from "../add/BookUpdatePopup";
 
 class BookDescription extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      isOpened: false,
-      isLongTerm: false
+      isRentPopupOpened: false,
+      isLongTerm: false,
+      isUpdatePopupOpened: false
     }
-    this.openPopup = this.openPopup.bind(this);
-    this.closePopup = this.closePopup.bind(this);
+
+    this.openRentPopup = this.openRentPopup.bind(this);
+    this.closeRentPopup = this.closeRentPopup.bind(this);
+    this.openUpdatePopup = this.openUpdatePopup.bind(this);
+    this.closeUpdatePopup = this.closeUpdatePopup.bind(this);
   }
 
   rentBook = async () => {
@@ -48,12 +54,19 @@ class BookDescription extends React.Component<any, any> {
           <li>출판사 : <span>{book.publisher}</span></li>
           <li>출판일 : <span>{book.publishingDate}</span></li>
           <li>등록일 : <span>{book.registrationDate}</span></li>
+          <li>분류 : <span>{book.category}</span></li>
           <li>남은 수량 : <span>{book.stockQuantity > 0 ? book.stockQuantity : '0 (대여불가)'}</span></li>
           <span className={""}>{book.description}</span>
-          <li>{book.stockQuantity > 0 ?
-            <Button variant="outlined" className="rent-button" onClick={this.openPopup}>대여하기</Button> : ""}</li>
+          <li>
+            {book.stockQuantity > 0 ?
+              <Button variant="outlined" className="rent-button" onClick={this.openRentPopup}>대여하기</Button> : ""}
+            {store.getState().isAdmin ?
+              <Button variant="outlined" className="update-button"
+                      onClick={this.openUpdatePopup}>수정하기</Button> : ""}
+          </li>
         </ul>
-        <Dialog open={this.state.isOpened == undefined ? false : this.state.isOpened} onClose={this.closePopup}>
+        <Dialog open={this.state.isRentPopupOpened == undefined ? false : this.state.isRentPopupOpened}
+                onClose={this.closeRentPopup}>
           <DialogTitle id="alert-dialog-title">{"정말로 대여하시겠습니까?"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
@@ -65,19 +78,29 @@ class BookDescription extends React.Component<any, any> {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.rentBook} color="primary"> 네 </Button>
-            <Button onClick={this.closePopup} color="primary" autoFocus> 아니오 </Button>
+            <Button onClick={this.closeRentPopup} color="primary" autoFocus> 아니오 </Button>
           </DialogActions>
         </Dialog>
+        <BookUpdatePopup open={this.state.isUpdatePopupOpened} book={this.props.book}
+                         onClose={this.closeUpdatePopup}/>
       </div>
     )
   };
 
-  private openPopup() {
-    this.setState({isOpened: true})
+  private openRentPopup() {
+    this.setState({isRentPopupOpened: true})
   };
 
-  private closePopup() {
-    this.setState({isOpened: false})
+  private closeRentPopup() {
+    this.setState({isRentPopupOpened: false})
+  };
+
+  private openUpdatePopup() {
+    this.setState({isUpdatePopupOpened: true})
+  };
+
+  private closeUpdatePopup() {
+    this.setState({isUpdatePopupOpened: false})
   };
 }
 
