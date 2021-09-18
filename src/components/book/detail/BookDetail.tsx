@@ -6,8 +6,8 @@ import BookDescription from "./BookDescription";
 import BookRentalTable from "./BookRentalTable";
 import api from '../../../api'
 
-class BookDetail extends React.Component<any,any> {
-  constructor(props:any) {
+class BookDetail extends React.Component<any, any> {
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -18,23 +18,6 @@ class BookDetail extends React.Component<any,any> {
 
   public componentDidMount() {
     this.fetchBookDetail()
-  }
-
-  private fetchBookDetail(){
-    api.get(`/books/` + this.props.bookId)
-    .then(response => {
-      const newBook = response.data;
-
-      if (!this.state.book.imageUrl) {
-        newBook.noThumbnailImageUrl=this.state.noThumbnailImageUrl
-      }
-
-      this.setState({ book: newBook });
-    })
-    .catch(error => {
-      console.log("책 상세 조회 API 사용중 에러 발생");
-      console.log(error);
-    })
   }
 
   render() {
@@ -49,6 +32,23 @@ class BookDetail extends React.Component<any,any> {
         <BookRentalTable bookId={this.props.bookId}/>
       </div>
     )
+  }
+
+  private fetchBookDetail() {
+    api.get(`/books/${this.props.bookId}`)
+      .then(response => {
+        const newBook = response.data;
+
+        if (!newBook.imageUrl) {
+          newBook.imageUrl = this.state.noThumbnailImageUrl
+        }
+
+        this.setState({book: newBook});
+      })
+      .catch(error => {
+        console.log("책 상세 조회 API 사용중 에러 발생");
+        console.log(error);
+      })
   }
 }
 
