@@ -1,22 +1,42 @@
 import {createStore} from 'redux';
 
 export default createStore((state, action) => {
-  if (state === undefined) {
-    return {
-      memberId: JSON.parse(localStorage.getItem('memberId')),
-      memberType: JSON.parse(localStorage.getItem('memberType'))
-    }
-  }
+    let memberId;
+    let memberType;
+    let isAdmin;
 
-  if (action.type === 'AUTHENTICATION') {
-    if (action.memberId && action.memberType) {
-      localStorage.setItem('memberId', JSON.stringify(action.memberId));
-      localStorage.setItem('memberType', JSON.stringify(action.memberType));
+    if (state === undefined) {
+      memberId = JSON.parse(localStorage.getItem('memberId'));
+      memberType = JSON.parse(localStorage.getItem('memberType'));
+      isAdmin = memberId && memberType === 'ADMIN';
+
+      return {
+        memberId: memberId,
+        memberType: memberType,
+        isAdmin: isAdmin,
+      };
+    }
+
+    if (action.type !== 'AUTHENTICATION') {
+      return state;
+    }
+
+    memberId = action.memberId;
+    memberType = action.memberType;
+    isAdmin = memberId && memberType === 'ADMIN';
+
+    if (memberId && memberType) {
+      localStorage.setItem('memberId', JSON.stringify(memberId));
+      localStorage.setItem('memberType', JSON.stringify(memberType));
     } else {
-      localStorage.clear()
+      localStorage.clear();
     }
-    return {...state, memberId: action.memberId, memberType: action.memberType}
-  }
 
-  return state;
-}, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+    return {
+      ...state,
+      memberId: memberId,
+      memberType: memberType,
+      isAdmin: isAdmin,
+    };
+  },
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
