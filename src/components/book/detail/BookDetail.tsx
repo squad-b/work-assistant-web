@@ -25,7 +25,7 @@ class BookDetail extends React.Component<any,any> {
     .then(response => {
       const newBook = response.data;
 
-      if (this.state.book.imageUrl === null || this.state.book.imageUrl === undefined || this.state.book.imageUrl === "") {
+      if (!this.state.book.imageUrl) {
         newBook.noThumbnailImageUrl=this.state.noThumbnailImageUrl
       }
 
