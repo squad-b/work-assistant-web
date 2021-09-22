@@ -23,26 +23,45 @@ class BookUpdatePopup extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      bookCategory: '',
-      stockQuantity: 0,
-      open: false
+      bookCategory: String,
+      stockQuantity: Number,
+      open: false,
+      bookCategories: {
+        "개발": "DEVELOP",
+        "경영": "MANAGEMENT",
+        "기획": "PLAN",
+        "마케팅": "MARKETING",
+        "자기계발": "SELF_IMPROVEMENT",
+        "자격증": "LICENSE",
+        "디자인": "DESIGN",
+        "소설": "FICTION",
+        "비소설": "NONFICTION"
+      }
     }
   }
 
   public render() {
     const {open, book, onClose} = this.props;
 
+    const initializeBook = () => {
+      this.setState({
+        bookCategory: this.state.bookCategories[book.category],
+        stockQuantity: book.stockQuantity
+      });
+    }
+
     const onChangeCategory = (e: any) => {
-      const bookCategory = e.target.value
-      this.setState({bookCategory: bookCategory})
+      const bookCategory = e.target.value;
+      this.setState({bookCategory: bookCategory});
     }
 
     const onChangeStockQuantity = (e: any) => {
-      const stockQuantity = e.target.value
+      const stockQuantity = e.target.value;
       if (stockQuantity < 1) {
-        alert("1 보다 큰 값을 넣어주세요")
-        return
+        alert("1 보다 큰 값을 넣어주세요");
+        return;
       }
+
       this.setState({
         stockQuantity: stockQuantity
       })
@@ -51,35 +70,24 @@ class BookUpdatePopup extends React.Component<any, any> {
     const onClickUpdateButton = async (book: any) => {
       try {
         const res = await api.put(`/books/${book.id}`, {
-          isbn: book.isbn.split(' ')[1],
-          title: book.title,
-          description: book.contents,
-          author: book.authors[0],
-          publishingDate: book.datetime,
-          publisher: book.publisher,
-          category: this.state.bookCategory,
-          imageUrl: book.thumbnail,
+          bookCategory: this.state.bookCategory,
           stockQuantity: this.state.stockQuantity
         });
-        if (res.data.result === "SUCCESS") {
-          alert("수정 완료")
-          onClose()
+
+        if (res.status === 200) {
+          alert("수정 완료!");
+          window.location.reload();
         }
       } catch (e) {
         if (e.response.status === 403) {
-          alert("관리자만 수정할 수 있습니다.")
+          alert("관리자만 수정할 수 있습니다.");
         }
       }
     }
 
-    const test = () => {
-      this.setState({
-        bookCategory: book.category
-      })
-    }
-
     return (
-      <Dialog open={open} fullWidth={true} maxWidth='sm' aria-labelledby={"book-add-popup-title"} onClose={onClose}>
+      <Dialog open={open} fullWidth={true} maxWidth='sm' aria-labelledby={"book-add-popup-title"} onClose={onClose}
+              onRendered={initializeBook}>
         <DialogTitle id={"book-add-popup-title"}>책 정보 수정</DialogTitle>
         <DialogContent>
           <form className={'book-popup-form'} noValidate>
@@ -90,7 +98,7 @@ class BookUpdatePopup extends React.Component<any, any> {
                  src={book.imageUrl ? book.imageUrl : 'https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png'}/>
             <FormControl className={'form-control'}>
               <InputLabel htmlFor='category'>책 카테고리</InputLabel>
-              <Select autoFocus value={book.category}
+              <Select autoFocus value={this.state.bookCategory}
                       inputProps={{name: 'book-category', id: 'book-category'}} onChange={onChangeCategory}>
                 <MenuItem value={'DEVELOP'}>개발</MenuItem>
                 <MenuItem value={'MANAGEMENT'}>경영</MenuItem>
@@ -107,7 +115,7 @@ class BookUpdatePopup extends React.Component<any, any> {
               id="standard-number"
               label="수량"
               type="number"
-              value={book.stockQuantity}
+              value={this.state.stockQuantity}
               onChange={onChangeStockQuantity}
             />
           </form>
