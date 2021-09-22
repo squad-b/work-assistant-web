@@ -82,7 +82,7 @@ class BookUpdatePopup extends React.Component<any, any> {
       <Dialog open={open} fullWidth={true} maxWidth='sm' aria-labelledby={"book-add-popup-title"} onClose={onClose}>
         <DialogTitle id={"book-add-popup-title"}>책 정보 수정</DialogTitle>
         <DialogContent>
-          <form className={'book-add-popup-form'} noValidate>
+          <form className={'book-popup-form'} noValidate>
             <DialogContentText>
               책 이름
             </DialogContentText>
