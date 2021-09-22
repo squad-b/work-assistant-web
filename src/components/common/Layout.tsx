@@ -12,9 +12,8 @@ const useStyles = makeStyles((theme) => ({
     background: "white",
   },
 }));
+
 const Layout:FC<any> =(props:any)=>{
-
-
     return (
       <div>
         <NavBar/>

@@ -5,14 +5,11 @@ import React from "react";
 import SearchBar from 'material-ui-search-bar';
 import api from '../../api';
 
-class BookListSection extends React.Component<any,any> {
-  constructor(props:any) {
+class BookListSection extends React.Component<any, any> {
+  constructor(props: any) {
     super(props);
-
-   
-
     this.state = {
-      searchKeyword:"",
+      searchKeyword: "",
       bookList: [],
       bookListByCategory: [],
       bookCategory: {
@@ -30,32 +27,61 @@ class BookListSection extends React.Component<any,any> {
       noThumbnailImageUrl: "https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png" // TODO: 전역으로 관리하기(redux?) 
     }
 
-    this.searchBook=this.searchBook.bind(this);
-    this.onChangeKeyword=this.onChangeKeyword.bind(this);
+    this.searchBook = this.searchBook.bind(this);
+    this.onChangeKeyword = this.onChangeKeyword.bind(this);
   }
 
   public componentDidMount() {
     this.fetchBookList();
   }
 
+  render() {
+    return (
+      <div>
+        <div className="book-search-bar">
+          <SearchBar
+            placeholder="책 제목을 입력해주세요 : )"
+            onChange={this.onChangeKeyword}
+            onRequestSearch={this.searchBook}
+          />
+        </div>
+        {Object.keys(this.state.bookCategory).map((key, i) => {
+          return (
+            <div key={i}>
+              <div>
+                <h3 className="book-category">{this.state.bookCategory[key]}</h3>
+              </div>
+              <div className="book-list-section">
+                {this.state.bookListByCategory[key] === undefined ? "" :
+                  this.state.bookListByCategory[key].map((book: any, j: number) => {
+                    return <BookCard book={book} key={j}/>
+                  })}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    );
+  }
+
   private fetchBookList() {
     api.get(`/books`)
-    .then(response => {
-      this.setState({bookList:response.data})
-      this.setState({ bookListByCategory: this.getBookListByCategory(this.state.bookList) });
-    })
-    .catch(error => {
-      console.log("책 목록 조회 API 사용중 에러 발생");
-      console.log(error);
-    })
+      .then(response => {
+        this.setState({bookList: response.data})
+        this.setState({bookListByCategory: this.getBookListByCategory(this.state.bookList)});
+      })
+      .catch(error => {
+        console.log("책 목록 조회 API 사용중 에러 발생");
+        console.log(error);
+      })
   }
 
   private getBookListByCategory(bookList: any[]) {
-    const bookListByCategory:any = {};
+    const bookListByCategory: any = {};
     bookList.forEach((book) => {
       const categories = book.category.split(",");
 
-      if (book.imageUrl === null || book.imageUrl === undefined || book.imageUrl === "") {
+      if (!book.imageUrl) {
         book.imageUrl = this.state.noThumbnailImageUrl;
       }
       categories.forEach((category: string | number) => {
@@ -69,7 +95,7 @@ class BookListSection extends React.Component<any,any> {
     return bookListByCategory;
   }
 
-  private searchBook(){
+  private searchBook() {
     const bookList = JSON.parse(JSON.stringify(this.state.bookList));
 
     for (let i = bookList.length - 1; i >= 0; i--) {
@@ -78,42 +104,11 @@ class BookListSection extends React.Component<any,any> {
       }
     }
 
-    this.setState({ bookListByCategory: this.getBookListByCategory(bookList) });
+    this.setState({bookListByCategory: this.getBookListByCategory(bookList)});
   }
 
-  private onChangeKeyword(searchKeyword:string):void{
+  private onChangeKeyword(searchKeyword: string): void {
     this.setState({searchKeyword})
-  }
-
-
-
-  render() {
-    return (
-      <div>
-        <div className="book-search-bar">
-          <SearchBar
-            placeholder="책 제목을 입력해주세요 : )"
-            onChange={this.onChangeKeyword}
-            onRequestSearch={this.searchBook} 
-          />
-        </div>
-        {Object.keys(this.state.bookCategory).map((key, i) => {
-          return (
-            <div key={i}> 
-              <div>
-                <h3 className="book-category">{this.state.bookCategory[key]}</h3>
-              </div>
-              <div className="book-list-section">
-                {this.state.bookListByCategory[key] === undefined ? "" : 
-                  this.state.bookListByCategory[key].map((book: any, j:number) => {
-                    return <BookCard book={book} key={j}/>
-                  })}
-              </div>
-            </div>
-          )
-        })}
-      </div>
-    );
   }
 }
 
