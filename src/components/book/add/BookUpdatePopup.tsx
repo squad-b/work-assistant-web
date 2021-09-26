@@ -41,7 +41,7 @@ const CategoryDisplayText = {
   ['NONFICTION']: '비소설'
 }
 
-const bookCategories = {
+const bookCategories: { [korean: string]: string } = {
   "개발": "DEVELOP",
   "경영": "MANAGEMENT",
   "기획": "PLAN",
@@ -53,7 +53,19 @@ const bookCategories = {
   "비소설": "NONFICTION"
 }
 
-class BookUpdatePopup extends React.Component<any, any> {
+interface BookUpdatePopupState {
+  bookCategory: string,
+  stockQuantity: number,
+  open: boolean,
+}
+
+class BookUpdatePopup extends React.Component<any, BookUpdatePopupState> {
+  state: BookUpdatePopupState = {
+    bookCategory: '',
+    stockQuantity: 0,
+    open: false
+  }
+
   private categoryMenus: Category[] = [
     'DEVELOP'
     , 'MANAGEMENT'
@@ -65,15 +77,6 @@ class BookUpdatePopup extends React.Component<any, any> {
     , 'FICTION'
     , 'NONFICTION'
   ]
-
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      bookCategory: String,
-      stockQuantity: Number,
-      open: false
-    }
-  }
 
   public render() {
     const {open, book, onClose} = this.props;
@@ -136,7 +139,7 @@ class BookUpdatePopup extends React.Component<any, any> {
 
               <Select autoFocus value={this.state.bookCategory}
                       inputProps={{name: 'book-category', id: 'book-category'}} onChange={onChangeCategory}>
-                {this.categoryMenus.map((category, idx) => <MenuItem
+                {this.categoryMenus.map((category) => <MenuItem
                   value={category}>{CategoryDisplayText[category]}</MenuItem>)}
               </Select>
             </FormControl>
