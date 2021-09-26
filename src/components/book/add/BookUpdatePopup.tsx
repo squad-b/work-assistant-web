@@ -52,7 +52,7 @@ class BookUpdatePopup extends React.Component<any, any> {
 
     const onChangeCategory = (e: any) => {
       const bookCategory = e.target.value;
-      this.setState({bookCategory: bookCategory});
+      this.setState({bookCategory});
     }
 
     const onChangeStockQuantity = (e: any) => {
