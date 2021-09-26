@@ -18,7 +18,41 @@ import {
 import Button from "@material-ui/core/Button";
 import api from "../../../api";
 
+type Category =
+  'DEVELOP'
+  | 'MANAGEMENT'
+  | 'PLAN'
+  | 'MARKETING'
+  | 'SELF_IMPROVEMENT'
+  | 'LICENSE'
+  | 'DESIGN'
+  | 'FICTION'
+  | 'NONFICTION';
+
+const CategoryDisplayText = {
+  ['DEVELOP']: '개발',
+  ['MANAGEMENT']: '경영',
+  ['PLAN']: '기획',
+  ['MARKETING']: '마케팅',
+  ['SELF_IMPROVEMENT']: '자기계발',
+  ['LICENSE']: '자격증',
+  ['DESIGN']: '디자인',
+  ['FICTION']: '소설',
+  ['NONFICTION']: '비소설'
+}
+
 class BookUpdatePopup extends React.Component<any, any> {
+  private categoryMenus: Category[] = [
+    'DEVELOP'
+    , 'MANAGEMENT'
+    , 'PLAN'
+    , 'MARKETING'
+    , 'SELF_IMPROVEMENT'
+    , 'LICENSE'
+    , 'DESIGN'
+    , 'FICTION'
+    , 'NONFICTION'
+  ]
 
   constructor(props: any) {
     super(props);
@@ -98,17 +132,11 @@ class BookUpdatePopup extends React.Component<any, any> {
                  src={book.imageUrl ? book.imageUrl : 'https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png'}/>
             <FormControl className={'form-control'}>
               <InputLabel htmlFor='category'>책 카테고리</InputLabel>
+
               <Select autoFocus value={this.state.bookCategory}
                       inputProps={{name: 'book-category', id: 'book-category'}} onChange={onChangeCategory}>
-                <MenuItem value={'DEVELOP'}>개발</MenuItem>
-                <MenuItem value={'MANAGEMENT'}>경영</MenuItem>
-                <MenuItem value={'PLAN'}>기획</MenuItem>
-                <MenuItem value={'MARKETING'}>마케팅</MenuItem>
-                <MenuItem value={'SELF_IMPROVEMENT'}>자기계발</MenuItem>
-                <MenuItem value={'LICENSE'}>자격증</MenuItem>
-                <MenuItem value={'DESIGN'}>디자인</MenuItem>
-                <MenuItem value={'FICTION'}>소설</MenuItem>
-                <MenuItem value={'NONFICTION'}>비소설</MenuItem>
+                {this.categoryMenus.map((category, idx) => <MenuItem
+                  value={category}>{CategoryDisplayText[category]}</MenuItem>)}
               </Select>
             </FormControl>
             <TextField
