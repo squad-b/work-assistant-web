@@ -41,6 +41,18 @@ const CategoryDisplayText = {
   ['NONFICTION']: '비소설'
 }
 
+const bookCategories = {
+  "개발": "DEVELOP",
+  "경영": "MANAGEMENT",
+  "기획": "PLAN",
+  "마케팅": "MARKETING",
+  "자기계발": "SELF_IMPROVEMENT",
+  "자격증": "LICENSE",
+  "디자인": "DESIGN",
+  "소설": "FICTION",
+  "비소설": "NONFICTION"
+}
+
 class BookUpdatePopup extends React.Component<any, any> {
   private categoryMenus: Category[] = [
     'DEVELOP'
@@ -59,18 +71,7 @@ class BookUpdatePopup extends React.Component<any, any> {
     this.state = {
       bookCategory: String,
       stockQuantity: Number,
-      open: false,
-      bookCategories: {
-        "개발": "DEVELOP",
-        "경영": "MANAGEMENT",
-        "기획": "PLAN",
-        "마케팅": "MARKETING",
-        "자기계발": "SELF_IMPROVEMENT",
-        "자격증": "LICENSE",
-        "디자인": "DESIGN",
-        "소설": "FICTION",
-        "비소설": "NONFICTION"
-      }
+      open: false
     }
   }
 
@@ -79,7 +80,7 @@ class BookUpdatePopup extends React.Component<any, any> {
 
     const initializeBook = () => {
       this.setState({
-        bookCategory: this.state.bookCategories[book.category],
+        bookCategory: bookCategories[book.category],
         stockQuantity: book.stockQuantity
       });
     }
