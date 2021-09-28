@@ -17,6 +17,7 @@ import {
 
 import Button from "@material-ui/core/Button";
 import api from "../../../api";
+import {CategoryDisplayText, CategoryMenus} from "../../../model/book/category/Category";
 
 class BookAddPopup extends React.Component<any, any> {
 
@@ -89,15 +90,8 @@ class BookAddPopup extends React.Component<any, any> {
               <InputLabel htmlFor='category'>책 카테고리</InputLabel>
               <Select autoFocus value={this.state.bookCategory}
                       inputProps={{name: 'book-category', id: 'book-category'}} onChange={onChangeCategory}>
-                <MenuItem value={'DEVELOP'}>개발</MenuItem>
-                <MenuItem value={'MANAGEMENT'}>경영</MenuItem>
-                <MenuItem value={'PLAN'}>기획</MenuItem>
-                <MenuItem value={'MARKETING'}>마케팅</MenuItem>
-                <MenuItem value={'SELF_IMPROVEMENT'}>자기계발</MenuItem>
-                <MenuItem value={'LICENSE'}>자격증</MenuItem>
-                <MenuItem value={'DESIGN'}>디자인</MenuItem>
-                <MenuItem value={'FICTION'}>소설</MenuItem>
-                <MenuItem value={'NONFICTION'}>비소설</MenuItem>
+                {CategoryMenus.map((category) => <MenuItem
+                  value={category}>{CategoryDisplayText[category]}</MenuItem>)}
               </Select>
             </FormControl>
             <TextField

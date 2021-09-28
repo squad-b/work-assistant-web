@@ -17,41 +17,7 @@ import {
 
 import Button from "@material-ui/core/Button";
 import api from "../../../api";
-
-type Category =
-  'DEVELOP'
-  | 'MANAGEMENT'
-  | 'PLAN'
-  | 'MARKETING'
-  | 'SELF_IMPROVEMENT'
-  | 'LICENSE'
-  | 'DESIGN'
-  | 'FICTION'
-  | 'NONFICTION';
-
-const CategoryDisplayText = {
-  ['DEVELOP']: '개발',
-  ['MANAGEMENT']: '경영',
-  ['PLAN']: '기획',
-  ['MARKETING']: '마케팅',
-  ['SELF_IMPROVEMENT']: '자기계발',
-  ['LICENSE']: '자격증',
-  ['DESIGN']: '디자인',
-  ['FICTION']: '소설',
-  ['NONFICTION']: '비소설'
-}
-
-const bookCategories: { [korean: string]: string } = {
-  "개발": "DEVELOP",
-  "경영": "MANAGEMENT",
-  "기획": "PLAN",
-  "마케팅": "MARKETING",
-  "자기계발": "SELF_IMPROVEMENT",
-  "자격증": "LICENSE",
-  "디자인": "DESIGN",
-  "소설": "FICTION",
-  "비소설": "NONFICTION"
-}
+import {Categories, CategoryDisplayText, CategoryMenus} from "../../../model/book/category/Category";
 
 interface BookUpdatePopupState {
   bookCategory: string,
@@ -66,24 +32,12 @@ class BookUpdatePopup extends React.Component<any, BookUpdatePopupState> {
     open: false
   }
 
-  private categoryMenus: Category[] = [
-    'DEVELOP'
-    , 'MANAGEMENT'
-    , 'PLAN'
-    , 'MARKETING'
-    , 'SELF_IMPROVEMENT'
-    , 'LICENSE'
-    , 'DESIGN'
-    , 'FICTION'
-    , 'NONFICTION'
-  ]
-
   public render() {
     const {open, book, onClose} = this.props;
 
     const initializeBook = () => {
       this.setState({
-        bookCategory: bookCategories[book.category],
+        bookCategory: Categories[book.category],
         stockQuantity: book.stockQuantity
       });
     }
@@ -136,10 +90,9 @@ class BookUpdatePopup extends React.Component<any, BookUpdatePopupState> {
                  src={book.imageUrl ? book.imageUrl : 'https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png'}/>
             <FormControl className={'form-control'}>
               <InputLabel htmlFor='category'>책 카테고리</InputLabel>
-
               <Select autoFocus value={this.state.bookCategory}
                       inputProps={{name: 'book-category', id: 'book-category'}} onChange={onChangeCategory}>
-                {this.categoryMenus.map((category) => <MenuItem
+                {CategoryMenus.map((category) => <MenuItem
                   value={category}>{CategoryDisplayText[category]}</MenuItem>)}
               </Select>
             </FormControl>
