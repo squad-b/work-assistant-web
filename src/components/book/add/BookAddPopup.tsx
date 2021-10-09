@@ -18,24 +18,24 @@ import {
 import Button from "@material-ui/core/Button";
 import api from "../../../api";
 
-class BookAddPopup extends React.Component<any,any> {
+class BookAddPopup extends React.Component<any, any> {
 
-  constructor(props:any) {
+  constructor(props: any) {
     super(props);
     this.state = {
       bookCategory: 'DEVELOP',
       stockQuantity: 1,
-      open : false
+      open: false
     }
   }
 
   public render() {
-    const onChangeCategory = (e:any) => {
+    const onChangeCategory = (e: any) => {
       const bookCategory = e.target.value
-      this.setState({bookCategory : bookCategory})
+      this.setState({bookCategory: bookCategory})
     }
 
-    const onChangeStockQuantity = (e:any) => {
+    const onChangeStockQuantity = (e: any) => {
       const stockQuantity = e.target.value
       if (stockQuantity < 1) {
         alert("1 보다 큰 값을 넣어주세요")
@@ -46,7 +46,7 @@ class BookAddPopup extends React.Component<any,any> {
       })
     }
 
-    const onClickRegisterButton = async (book:any) => {
+    const onClickRegisterButton = async (book: any) => {
       try {
         const res = await api.post("/books", {
           isbn: book.isbn.split(' ')[1],
@@ -66,7 +66,7 @@ class BookAddPopup extends React.Component<any,any> {
         if (res.data.result === "KEY_DUPLICATION") {
           alert("이미 등록된 책 입니다.")
         }
-      } catch (e) {
+      } catch (e: any) {
         if (e.response.status === 403) {
           alert("관리자만 등록할 수 있습니다.")
         }
@@ -83,10 +83,12 @@ class BookAddPopup extends React.Component<any,any> {
             <DialogContentText>
               책 이름
             </DialogContentText>
-            <img className={'book-thumbnail'} src={book ? book.thumbnail: 'https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png'}/>
+            <img className={'book-thumbnail'}
+                 src={book ? book.thumbnail : 'https://resource.miricanvas.com/image/common/design-history-preview-placeholder.png'}/>
             <FormControl className={'form-control'}>
               <InputLabel htmlFor='category'>책 카테고리</InputLabel>
-              <Select autoFocus value={this.state.bookCategory} inputProps={{name:'book-category', id:'book-category'}} onChange={onChangeCategory}>
+              <Select autoFocus value={this.state.bookCategory}
+                      inputProps={{name: 'book-category', id: 'book-category'}} onChange={onChangeCategory}>
                 <MenuItem value={'DEVELOP'}>개발</MenuItem>
                 <MenuItem value={'MANAGEMENT'}>경영</MenuItem>
                 <MenuItem value={'PLAN'}>기획</MenuItem>
@@ -107,7 +109,9 @@ class BookAddPopup extends React.Component<any,any> {
             />
           </form>
           <DialogActions>
-            <Button onClick={() => {onClickRegisterButton(book)}}>
+            <Button onClick={() => {
+              onClickRegisterButton(book)
+            }}>
               등록하기
             </Button>
           </DialogActions>
