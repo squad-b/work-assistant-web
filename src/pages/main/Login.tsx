@@ -36,9 +36,6 @@ const Login:FC<any>=(props:any)=>{
     props.history.push('/');
   }
 
-
-
-
   const useStyles=()=>{
     return makeStyles((theme) => ({
       paper: {
@@ -61,12 +58,8 @@ const Login:FC<any>=(props:any)=>{
       },
     }));
   }
-  
 
- 
-
-    const classes = useStyles();
-
+  const classes = useStyles();
 
     return (
       <Container component="main" maxWidth="xs">
