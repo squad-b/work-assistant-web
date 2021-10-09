@@ -70,7 +70,7 @@ class BookUpdatePopup extends React.Component<any, BookUpdatePopupState> {
           alert("수정 완료!");
           window.location.reload();
         }
-      } catch (e) {
+      } catch (e: any) {
         if (e.response.status === 403) {
           alert("관리자만 수정할 수 있습니다.");
         }
