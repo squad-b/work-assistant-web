@@ -21,8 +21,9 @@ const Login:FC<any>=(props:any)=>{
     password: ''
   })
  
-  const login = async () => {
+  const login = async (e: React.FormEvent<HTMLFormElement>) => {
     // TODO: 윤병, email, password 유효성 검사
+    e.preventDefault();
     const response = await api.post('/login', {email:state.email, password: state.password});
     if (response.data.result !== 'SUCCESS') {
       alert('땡');
